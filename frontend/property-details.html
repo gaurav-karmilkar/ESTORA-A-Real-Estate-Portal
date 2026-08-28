@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estate Details | ESTORA Luxury Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="nav-brand">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        ESTORA
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html?listingType=BUY" class="nav-link">Buy</a></li>
+        <li><a href="/properties.html?listingType=RENT" class="nav-link">Rent</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/agents.html" class="nav-link">Agents</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div id="nav-user-actions"></div>
+        <button class="nav-toggle" onclick="document.getElementById('nav-menu').classList.toggle('show')">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container" style="margin-top: 3rem; margin-bottom: 6rem;">
+    <!-- Breadcrumb & Actions -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+      <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;">
+        <a href="/index.html" style="color:var(--text-muted);">Home</a> <span>/</span>
+        <a href="/properties.html" style="color:var(--text-muted);">Properties</a> <span>/</span>
+        <span id="breadcrumb-title" style="color:var(--text); font-weight:600;">Estate Portfolio</span>
+      </div>
+
+      <div style="display:flex; gap:0.75rem;">
+        <button class="btn btn-outline btn-sm" id="detail-fav-btn" onclick="handleDetailFavToggle()">
+          <i class="fa-regular fa-heart"></i> Save Estate
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="navigator.clipboard.writeText(window.location.href); Utils.showToast('Estate link copied to clipboard.', 'success');">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Share
+        </button>
+      </div>
+    </div>
+
+    <!-- Title & Price Header -->
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1.5rem;">
+      <div>
+        <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem;">
+          <span class="badge badge-buy" id="detail-listing-badge">FOR PURCHASE</span>
+          <span class="badge" style="background:var(--surface-alt); color:var(--text); border:1px solid var(--border);" id="detail-type-badge">APARTMENT</span>
+          <span class="badge badge-approved" id="detail-status-badge">CERTIFIED TITLE</span>
+        </div>
+        <h1 id="detail-title" style="font-family:var(--font-display); font-size:clamp(2.4rem, 4.5vw, 3.75rem); font-weight:400; line-height:1.1; margin-bottom:0.6rem;">Loading Estate...</h1>
+        <div style="display:flex; align-items:center; gap:0.5rem; color:var(--text-muted); font-size:13px;" id="detail-location">
+          <i class="fa-solid fa-location-dot" style="color:var(--text-muted);"></i>
+          <span>Loading address...</span>
+        </div>
+      </div>
+
+      <div style="text-align:right;">
+        <span style="font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:0.25rem;">PRICE VALUATION</span>
+        <div style="font-family:var(--font-display); font-size:clamp(2.2rem, 3.8vw, 3.25rem); font-weight:500; color:var(--primary); line-height:1;" id="detail-price">
+          ₹0
+        </div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:0.35rem;" id="detail-price-sqft">₹0 / sq.ft</div>
+      </div>
+    </div>
+
+    <!-- Image Gallery -->
+    <div class="gallery-grid" id="detail-gallery">
+      <div class="gallery-item gallery-main skeleton"></div>
+      <div class="gallery-item skeleton"></div>
+      <div class="gallery-item skeleton"></div>
+    </div>
+
+    <!-- Two-Column Editorial Layout -->
+    <div class="property-detail-layout">
+      <!-- Left Column: Specs, Description, Amenities, Calculator -->
+      <div>
+        <!-- Key Specifications Grid -->
+        <div class="detail-section">
+          <h2 class="detail-section-title">Architectural Overview</h2>
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem; text-align:center;">
+            <div style="padding:1.5rem 1rem; background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-xs);">
+              <i class="fa-solid fa-bed" style="color:var(--text); font-size:1.4rem; margin-bottom:0.6rem; display:block;"></i>
+              <div style="font-size:9px; color:var(--text-muted); font-weight:600; letter-spacing:0.16em; text-transform:uppercase;">BEDROOMS</div>
+              <div style="font-family:var(--font-display); font-weight:500; font-size:1.35rem; margin-top:0.25rem;" id="spec-beds">-</div>
+            </div>
+
+            <div style="padding:1.5rem 1rem; background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-xs);">
+              <i class="fa-solid fa-bath" style="color:var(--text); font-size:1.4rem; margin-bottom:0.6rem; display:block;"></i>
+              <div style="font-size:9px; color:var(--text-muted); font-weight:600; letter-spacing:0.16em; text-transform:uppercase;">BATHROOMS</div>
+              <div style="font-family:var(--font-display); font-weight:500; font-size:1.35rem; margin-top:0.25rem;" id="spec-baths">-</div>
+            </div>
+
+            <div style="padding:1.5rem 1rem; background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-xs);">
+              <i class="fa-solid fa-ruler-combined" style="color:var(--text); font-size:1.4rem; margin-bottom:0.6rem; display:block;"></i>
+              <div style="font-size:9px; color:var(--text-muted); font-weight:600; letter-spacing:0.16em; text-transform:uppercase;">CARPET AREA</div>
+              <div style="font-family:var(--font-display); font-weight:500; font-size:1.35rem; margin-top:0.25rem;" id="spec-area">-</div>
+            </div>
+
+            <div style="padding:1.5rem 1rem; background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-xs);">
+              <i class="fa-solid fa-car" style="color:var(--text); font-size:1.4rem; margin-bottom:0.6rem; display:block;"></i>
+              <div style="font-size:9px; color:var(--text-muted); font-weight:600; letter-spacing:0.16em; text-transform:uppercase;">PARKING BAY</div>
+              <div style="font-family:var(--font-display); font-weight:500; font-size:1.35rem; margin-top:0.25rem;" id="spec-parking">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="detail-section">
+          <h2 class="detail-section-title">About this Residence</h2>
+          <div id="detail-description" style="color:var(--text); line-height:1.9; font-size:14px; font-weight:300;">
+            Loading detailed editorial description...
+          </div>
+        </div>
+
+        <!-- Amenities -->
+        <div class="detail-section">
+          <h2 class="detail-section-title">Curated Amenities & Provisions</h2>
+          <div class="amenity-chips" id="detail-amenities">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Mortgage / EMI Calculator -->
+        <div class="detail-section">
+          <h2 class="detail-section-title">Capital Investment & EMI Calculator</h2>
+          <p style="color:var(--text-muted); margin-bottom:2rem; font-size:13px; line-height:1.6;">
+            Estimate financing installments with standard national banking rates and customized tenure terms.
+          </p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
+            <div class="form-group">
+              <label class="form-label">Loan Capital (₹)</label>
+              <input type="number" id="calc-loan-amount" class="form-control" value="20000000" oninput="calculateEmi()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Annual Interest Rate (%)</label>
+              <input type="number" id="calc-interest-rate" class="form-control" value="8.5" step="0.1" oninput="calculateEmi()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tenure (Years)</label>
+              <input type="number" id="calc-tenure-years" class="form-control" value="20" oninput="calculateEmi()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Equity Down Payment (₹)</label>
+              <input type="number" id="calc-down-payment" class="form-control" value="5000000" oninput="calculateEmi()">
+            </div>
+          </div>
+
+          <div style="background:var(--surface-alt); border:1px solid var(--border); padding:2rem; border-radius:var(--radius-xs); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
+            <div>
+              <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:0.18em; text-transform:uppercase;">ESTIMATED MONTHLY INSTALLMENT</div>
+              <div style="font-family:var(--font-display); font-size:2.2rem; font-weight:500; color:var(--primary); margin-top:0.25rem;" id="calc-monthly-emi">₹0 / mo</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:0.18em; text-transform:uppercase;">TOTAL REPAYMENT (PRINCIPAL + INTEREST)</div>
+              <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:500; color:var(--text); margin-top:0.25rem;" id="calc-total-payment">₹0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Sticky Agent Contact & Inquiry Form -->
+      <div>
+        <div class="sticky-sidebar-card">
+          <div class="agent-contact-box">
+            <img src="" alt="Agent" id="agent-avatar" class="agent-contact-avatar">
+            <div>
+              <h3 style="font-family:var(--font-display); font-size:1.35rem; font-weight:500; margin-bottom:0.2rem;" id="agent-name">Agent Name</h3>
+              <div style="font-size:11px; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase;" id="agent-agency">Prime Realty</div>
+              <div class="badge badge-approved" style="font-size:8px; margin-top:0.4rem;" id="agent-verified-badge">
+                <i class="fa-solid fa-circle-check"></i> CERTIFIED ADVISOR
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:1.75rem;">
+            <div style="display:flex; gap:0.5rem;">
+              <a href="#" id="agent-call-btn" class="btn btn-outline btn-block btn-sm">
+                <i class="fa-solid fa-phone"></i> Call
+              </a>
+              <a href="#" id="agent-whatsapp-btn" class="btn btn-outline btn-block btn-sm">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <h4 style="font-family:var(--font-display); font-size:1.25rem; font-weight:500; margin-bottom:1.25rem; border-top:1px solid var(--border); padding-top:1.25rem;">
+            Request Private Consultation
+          </h4>
+
+          <form id="inquiry-form" onsubmit="handleInquirySubmit(event)">
+            <input type="hidden" id="inquiry-property-id" value="">
+            
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="inquiry-name" class="form-control" required placeholder="Your Full Name">
+            </div>
+
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label class="form-label">Email Address</label>
+              <input type="email" id="inquiry-email" class="form-control" required placeholder="client@domain.com">
+            </div>
+
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" id="inquiry-phone" class="form-control" required placeholder="+91 98765 43210">
+            </div>
+
+            <div class="form-group" style="margin-bottom:1.5rem;">
+              <label class="form-label">Bespoke Inquiry</label>
+              <textarea id="inquiry-message" class="form-control" rows="3" required placeholder="I am interested in scheduling a private tour of this residence. Please contact me with more information."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="inquiry-submit-btn">
+              Submit Request
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 ESTORA Luxury Real Estate Editorial. All rights reserved.</div>
+        <div>Curated Architectural Residences & Certified Local Advisors</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/favorites.js"></script>
+  <script src="/js/properties.js"></script>
+  <script>
+    let currentProperty = null;
+
+    async function loadPropertyDetails() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+
+      if (!id) {
+        window.location.href = '/properties.html';
+        return;
+      }
+
+      try {
+        const res = await ApiService.getPropertyById(id);
+        const prop = res.data;
+        currentProperty = prop;
+
+        document.title = `${prop.title} | ESTORA Luxury Portfolio`;
+        document.getElementById('breadcrumb-title').textContent = prop.title;
+        document.getElementById('detail-title').textContent = prop.title;
+        document.getElementById('detail-location').querySelector('span').textContent = `${prop.address}, ${prop.locality}, ${prop.city}`;
+        document.getElementById('detail-price').innerHTML = Utils.formatPrice(prop.price, prop.listingType);
+        
+        if (prop.area > 0) {
+          const perSqft = Math.round(prop.price / prop.area);
+          document.getElementById('detail-price-sqft').textContent = `₹${perSqft.toLocaleString('en-IN')} / sq.ft`;
+        }
+
+        document.getElementById('detail-listing-badge').textContent = `FOR ${prop.listingType === 'RENT' ? 'LEASE' : 'PURCHASE'}`;
+        document.getElementById('detail-listing-badge').className = `badge ${prop.listingType === 'RENT' ? 'badge-rent' : 'badge-buy'}`;
+        document.getElementById('detail-type-badge').textContent = prop.propertyType;
+
+        // Specs
+        document.getElementById('spec-beds').textContent = prop.bedrooms > 0 ? `${prop.bedrooms} Beds` : 'Studio';
+        document.getElementById('spec-baths').textContent = prop.bathrooms > 0 ? `${prop.bathrooms} Baths` : '-';
+        document.getElementById('spec-area').textContent = Utils.formatArea(prop.area);
+        document.getElementById('spec-parking').textContent = prop.parking > 0 ? `${prop.parking} Reserved` : 'Included';
+
+        // Description
+        document.getElementById('detail-description').innerHTML = `<p>${Utils.escapeHtml(prop.description).replace(/\n/g, '<br><br>')}</p>`;
+
+        // Amenities
+        const amContainer = document.getElementById('detail-amenities');
+        if (prop.amenities && prop.amenities.length > 0) {
+          amContainer.innerHTML = prop.amenities.map(am => `
+            <div class="amenity-chip">
+              <i class="${Utils.getAmenityIcon(am)}" style="color:var(--text);"></i>
+              <span>${Utils.escapeHtml(am)}</span>
+            </div>
+          `).join('');
+        } else {
+          amContainer.innerHTML = '<div style="color:var(--text-muted); font-size:12px;">Standard residential amenities included.</div>';
+        }
+
+        // Gallery
+        const galleryEl = document.getElementById('detail-gallery');
+        const images = prop.images && prop.images.length > 0 ? prop.images : [
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
+        ];
+        
+        galleryEl.innerHTML = `
+          <div class="gallery-item gallery-main">
+            <img src="${images[0]}" alt="${Utils.escapeHtml(prop.title)}">
+          </div>
+          <div class="gallery-item">
+            <img src="${images[1] || images[0]}" alt="${Utils.escapeHtml(prop.title)}">
+          </div>
+          <div class="gallery-item">
+            <img src="${images[2] || images[0]}" alt="${Utils.escapeHtml(prop.title)}">
+          </div>
+        `;
+
+        // Agent Contact
+        if (prop.agent) {
+          document.getElementById('agent-avatar').src = prop.agent.avatarUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80';
+          document.getElementById('agent-name').textContent = prop.agent.name;
+          document.getElementById('agent-agency').textContent = prop.agent.agency || 'Certified Luxury Advisor';
+          document.getElementById('agent-call-btn').href = `tel:${prop.agent.phone || '+919800011111'}`;
+          document.getElementById('agent-whatsapp-btn').href = `https://wa.me/${(prop.agent.phone || '919800011111').replace(/[^0-9]/g, '')}`;
+        }
+
+        document.getElementById('inquiry-property-id').value = prop.id;
+
+        // Auto-fill logged in user info in inquiry form
+        const user = Auth.getUser();
+        if (user) {
+          document.getElementById('inquiry-name').value = user.name || '';
+          document.getElementById('inquiry-email').value = user.email || '';
+          document.getElementById('inquiry-phone').value = user.phone || '';
+        }
+
+        // EMI Calculator Initializer
+        if (prop.listingType === 'BUY') {
+          const loan = Math.round(prop.price * 0.8);
+          document.getElementById('calc-loan-amount').value = loan;
+          document.getElementById('calc-down-payment').value = prop.price - loan;
+          calculateEmi();
+        }
+
+        updateFavButton();
+      } catch (err) {
+        Utils.showToast('Failed to load estate details', 'error');
+      }
+    }
+
+    function calculateEmi() {
+      const loan = Number(document.getElementById('calc-loan-amount').value) || 0;
+      const annualRate = Number(document.getElementById('calc-interest-rate').value) || 0;
+      const years = Number(document.getElementById('calc-tenure-years').value) || 0;
+
+      if (loan <= 0 || annualRate <= 0 || years <= 0) return;
+
+      const monthlyRate = (annualRate / 12) / 100;
+      const months = years * 12;
+
+      const emi = (loan * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+      const totalPayment = emi * months;
+
+      document.getElementById('calc-monthly-emi').innerHTML = `₹${Math.round(emi).toLocaleString('en-IN')} <span style="font-size:0.85rem; font-weight:400; color:var(--text-muted); font-family:var(--font-body);">/ mo</span>`;
+      document.getElementById('calc-total-payment').textContent = `₹${Math.round(totalPayment).toLocaleString('en-IN')}`;
+    }
+
+    function updateFavButton() {
+      const btn = document.getElementById('detail-fav-btn');
+      if (!btn || !currentProperty) return;
+
+      const isFav = Favorites.isFavorite(currentProperty.id);
+      if (isFav) {
+        btn.innerHTML = '<i class="fa-solid fa-heart" style="color:var(--danger);"></i> Saved to Favorites';
+        btn.classList.add('active');
+      } else {
+        btn.innerHTML = '<i class="fa-regular fa-heart"></i> Save Estate';
+        btn.classList.remove('active');
+      }
+    }
+
+    async function handleDetailFavToggle() {
+      if (!currentProperty) return;
+      await Favorites.toggleFavorite(currentProperty.id, document.getElementById('detail-fav-btn'));
+      updateFavButton();
+    }
+
+    async function handleInquirySubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('inquiry-submit-btn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = 'Submitting Request...';
+      btn.disabled = true;
+
+      try {
+        const propertyId = document.getElementById('inquiry-property-id').value;
+        const name = document.getElementById('inquiry-name').value;
+        const email = document.getElementById('inquiry-email').value;
+        const phone = document.getElementById('inquiry-phone').value;
+        const message = document.getElementById('inquiry-message').value;
+
+        const res = await ApiService.createInquiry({
+          propertyId,
+          name,
+          email,
+          phone,
+          message
+        });
+
+        Utils.showToast(res.message || 'Inquiry received. Your private advisor will contact you.', 'success');
+        document.getElementById('inquiry-message').value = '';
+      } catch (err) {
+        Utils.showToast(err.message || 'Failed to submit request', 'error');
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPropertyDetails();
+    });
+  </script>
+</body>
+</html>

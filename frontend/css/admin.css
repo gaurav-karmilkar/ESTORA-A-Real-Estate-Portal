@@ -1,0 +1,361 @@
+/* ==========================================================================
+   ESTORA LUXURY EDITORIAL DASHBOARD & ADMIN PANEL STYLES
+   ========================================================================== */
+
+.dashboard-wrapper {
+  display: flex;
+  min-height: calc(100vh - 80px);
+  background-color: var(--surface-alt);
+}
+
+.dashboard-sidebar {
+  width: 280px;
+  background-color: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-user-card {
+  padding: 1.25rem;
+  background-color: var(--surface-warm);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xs);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.sidebar-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.sidebar-user-name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.sidebar-user-role {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1.1rem;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  transition: var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+  background-color: var(--surface-warm);
+  color: var(--text-dark);
+  border-color: var(--border);
+}
+
+.sidebar-link i, .sidebar-link svg {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.sidebar-link.active i {
+  color: var(--text-dark);
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 2.5rem 3.5rem;
+  overflow-y: auto;
+}
+
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+}
+
+.dash-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.15;
+}
+
+.dash-subtitle {
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  margin-top: 0.35rem;
+}
+
+/* Metric Cards */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.metric-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-subtle);
+  transition: var(--transition);
+}
+
+.metric-card:hover {
+  border-color: var(--text-dark);
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.metric-title {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.metric-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--surface-warm);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.metric-change {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Table Card */
+.table-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  box-shadow: var(--shadow-subtle);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+
+.table-header {
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th {
+  padding: 1rem 1.5rem;
+  background-color: var(--surface-warm);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 13px;
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.data-table tr:hover td {
+  background-color: var(--surface-warm);
+}
+
+/* Chart Container */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.chart-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-subtle);
+}
+
+.chart-card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   ADMIN PANEL & DASHBOARD - DARK MODE
+   ========================================================================== */
+[data-theme="dark"] .dashboard-wrapper {
+  background-color: var(--bg-primary);
+}
+
+[data-theme="dark"] .dashboard-sidebar {
+  background-color: var(--bg-card);
+  border-right-color: var(--border);
+}
+
+[data-theme="dark"] .sidebar-user-card {
+  background-color: var(--bg-secondary);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .sidebar-avatar {
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .sidebar-link {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .sidebar-link:hover,
+[data-theme="dark"] .sidebar-link.active {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .sidebar-link.active i {
+  color: var(--accent);
+}
+
+[data-theme="dark"] .dash-header {
+  border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .metric-card {
+  background-color: var(--bg-card);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .metric-card:hover {
+  border-color: var(--accent);
+}
+
+[data-theme="dark"] .metric-icon {
+  background-color: var(--bg-secondary);
+  border-color: var(--border);
+  color: var(--accent);
+}
+
+[data-theme="dark"] .table-card {
+  background-color: var(--bg-card);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .table-header {
+  border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .data-table th {
+  background-color: var(--bg-secondary);
+  color: var(--text-muted);
+  border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .data-table td {
+  color: var(--text-primary);
+  border-bottom-color: var(--border-light);
+}
+
+[data-theme="dark"] .data-table tr:hover td {
+  background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .chart-card {
+  background-color: var(--bg-card);
+  border-color: var(--border);
+}
+

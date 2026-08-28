@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Property Listing | ESTORA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="container-fluid nav-container">
+      <a href="/index.html" class="nav-brand">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        ESTORA <span style="font-size:0.75rem; color:var(--primary); font-weight:700; background:var(--primary-light); padding:2px 8px; border-radius:12px; margin-left:6px;">AGENT PORTAL</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="/index.html" class="nav-link">Main Portal</a></li>
+        <li><a href="/agent/dashboard.html" class="nav-link">Agent Dashboard</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div id="nav-user-actions"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-user-card">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80" alt="Avatar" id="sidebar-user-avatar" class="sidebar-avatar">
+        <div>
+          <div class="sidebar-user-name" id="sidebar-user-name">Agent Name</div>
+          <div class="sidebar-user-role" id="sidebar-user-role">VERIFIED AGENT</div>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li>
+          <a href="/agent/dashboard.html" class="sidebar-link">
+            <i class="fa-solid fa-chart-line"></i> Agent Overview
+          </a>
+        </li>
+        <li>
+          <a href="/agent/add-property.html" class="sidebar-link active">
+            <i class="fa-solid fa-circle-plus"></i> Add Property
+          </a>
+        </li>
+        <li>
+          <a href="/dashboard.html" class="sidebar-link">
+            <i class="fa-solid fa-user-gear"></i> Profile & Agency
+          </a>
+        </li>
+        <li style="margin-top:auto;">
+          <a href="javascript:void(0)" onclick="Auth.logout()" class="sidebar-link" style="color:var(--danger);">
+            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="dash-header">
+        <div>
+          <h1 class="dash-title">Create Property Listing</h1>
+          <p class="dash-subtitle">Submit property specifications, high-res photos, and pricing</p>
+        </div>
+        <a href="/agent/dashboard.html" class="btn btn-outline">
+          <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </a>
+      </div>
+
+      <div class="chart-card">
+        <form id="add-property-form" onsubmit="Agent.handlePropertyFormSubmit(event, false)">
+          <!-- Section 1: Basic Information -->
+          <h3 style="font-size:1.15rem; margin-bottom:1rem; border-bottom:1px solid var(--border-light); padding-bottom:0.5rem;">
+            1. Basic Listing Details
+          </h3>
+
+          <div class="form-group" style="margin-bottom:1rem;">
+            <label class="form-label">Property Title *</label>
+            <input type="text" id="prop-title" class="form-control" required placeholder="e.g. Skyline Penthouse with Panoramic Sea View">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin-bottom:1rem;">
+            <div class="form-group">
+              <label class="form-label">Listing Type *</label>
+              <select id="prop-listing-type" class="form-control" required>
+                <option value="BUY">For Sale (Buy)</option>
+                <option value="RENT">For Rent</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Property Type *</label>
+              <select id="prop-type" class="form-control" required>
+                <option value="APARTMENT">Apartment / Flat</option>
+                <option value="VILLA">Luxury Villa</option>
+                <option value="HOUSE">Independent House</option>
+                <option value="PLOT">Residential Plot</option>
+                <option value="COMMERCIAL">Commercial Space</option>
+                <option value="OFFICE">Corporate Office</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Price in INR (₹) *</label>
+              <input type="number" id="prop-price" class="form-control" required min="1000" placeholder="e.g. 35000000">
+            </div>
+          </div>
+
+          <!-- Section 2: Location Details -->
+          <h3 style="font-size:1.15rem; margin:1.5rem 0 1rem; border-bottom:1px solid var(--border-light); padding-bottom:0.5rem;">
+            2. Location & Address
+          </h3>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+            <div class="form-group">
+              <label class="form-label">City *</label>
+              <select id="prop-city" class="form-control" required>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Bengaluru">Bengaluru</option>
+                <option value="Pune">Pune</option>
+                <option value="Delhi">Delhi NCR</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Nagpur">Nagpur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Locality / Neighborhood *</label>
+              <input type="text" id="prop-locality" class="form-control" required placeholder="e.g. Bandra West, Worli, Indiranagar">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:1rem;">
+            <label class="form-label">Full Street Address *</label>
+            <input type="text" id="prop-address" class="form-control" required placeholder="e.g. 14th Road, Off Carter Road, Bandra West">
+          </div>
+
+          <!-- Section 3: Physical Specifications -->
+          <h3 style="font-size:1.15rem; margin:1.5rem 0 1rem; border-bottom:1px solid var(--border-light); padding-bottom:0.5rem;">
+            3. Physical Specifications
+          </h3>
+
+          <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:1rem; margin-bottom:1rem;">
+            <div class="form-group">
+              <label class="form-label">Bedrooms (BHK)</label>
+              <input type="number" id="prop-bedrooms" class="form-control" min="0" value="3">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Bathrooms</label>
+              <input type="number" id="prop-bathrooms" class="form-control" min="0" value="3">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Super Area (Sq.Ft) *</label>
+              <input type="number" id="prop-area" class="form-control" required min="50" placeholder="e.g. 2400">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Parking Spots</label>
+              <input type="number" id="prop-parking" class="form-control" min="0" value="2">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Furnishing</label>
+              <select id="prop-furnishing" class="form-control">
+                <option value="FURNISHED">Furnished</option>
+                <option value="SEMI_FURNISHED" selected>Semi-Furnished</option>
+                <option value="UNFURNISHED">Unfurnished</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:1.5rem;">
+            <label class="form-label">Detailed Property Description *</label>
+            <textarea id="prop-description" class="form-control" rows="5" required placeholder="Describe the layout, high-end fixtures, ventilation, natural light, security, and proximity to hubs..."></textarea>
+          </div>
+
+          <!-- Section 4: Amenities -->
+          <h3 style="font-size:1.15rem; margin:1.5rem 0 1rem; border-bottom:1px solid var(--border-light); padding-bottom:0.5rem;">
+            4. Amenities & Features
+          </h3>
+
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:0.75rem; margin-bottom:1.5rem;">
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Parking" checked> Parking</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Swimming Pool" checked> Swimming Pool</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Gym" checked> Gym / Fitness</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Security" checked> 24/7 Security</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Balcony" checked> Balcony View</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Lift" checked> Elevator / Lift</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Clubhouse"> Clubhouse</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Power Backup" checked> Power Backup</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Garden"> Private Garden</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Wi-Fi"> High Speed Fiber</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="Air Conditioning"> Central Air Con</label>
+            <label class="checkbox-label"><input type="checkbox" name="amenities" value="CCTV"> CCTV Monitoring</label>
+          </div>
+
+          <!-- Section 5: Photos / Images -->
+          <h3 style="font-size:1.15rem; margin:1.5rem 0 1rem; border-bottom:1px solid var(--border-light); padding-bottom:0.5rem;">
+            5. Property Images
+          </h3>
+
+          <div class="form-group" style="margin-bottom:1.5rem;">
+            <label class="form-label">Image URLs (comma separated)</label>
+            <input type="text" id="prop-images" class="form-control" placeholder="https://images.unsplash.com/..., https://images.unsplash.com/...">
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.3rem;">
+              Tip: Provide multiple URLs separated by commas. Default high-resolution estate photography is provided if left blank.
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:1rem;">
+            <a href="/agent/dashboard.html" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Submit Property Listing
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/favorites.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/agent.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (Auth.requireAuth('AGENT')) {
+        Dashboard.renderSidebarUserInfo();
+      }
+    });
+  </script>
+</body>
+</html>

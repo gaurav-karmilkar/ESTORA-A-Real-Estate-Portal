@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Inquiries | ESTORA Luxury Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="container-fluid nav-container">
+      <a href="/index.html" class="nav-brand">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        ESTORA
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/agents.html" class="nav-link">Agents</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div id="nav-user-actions"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-user-card">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80" alt="Avatar" id="sidebar-user-avatar" class="sidebar-avatar">
+        <div>
+          <div class="sidebar-user-name" id="sidebar-user-name">User Name</div>
+          <div class="sidebar-user-role" id="sidebar-user-role">MEMBER</div>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li>
+          <a href="/dashboard.html" class="sidebar-link">
+            <i class="fa-solid fa-user-gear"></i> Profile & Settings
+          </a>
+        </li>
+        <li>
+          <a href="/favorites.html" class="sidebar-link">
+            <i class="fa-solid fa-heart"></i> Saved Properties
+          </a>
+        </li>
+        <li>
+          <a href="/inquiries.html" class="sidebar-link active">
+            <i class="fa-solid fa-envelope-open-text"></i> My Inquiries
+          </a>
+        </li>
+        <li style="margin-top:auto;">
+          <a href="javascript:void(0)" onclick="Auth.logout()" class="sidebar-link" style="color:var(--danger);">
+            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="dash-header">
+        <div>
+          <h1 class="dash-title">Consultation <span class="script-accent">Requests</span></h1>
+          <p class="dash-subtitle">Track your private tour requests and advisor communications</p>
+        </div>
+      </div>
+
+      <div class="data-table-container">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Estate Reference</th>
+                <th>Assigned Advisor</th>
+                <th>Inquiry Message</th>
+                <th>Status</th>
+                <th>Date Sent</th>
+              </tr>
+            </thead>
+            <tbody id="user-inquiries-tbody">
+              <tr>
+                <td colspan="5" style="text-align:center; padding:3rem; color:var(--text-muted);">
+                  Loading your inquiries...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    async function loadUserInquiries() {
+      const user = Auth.requireAuth();
+      if (!user) return;
+
+      const tbody = document.getElementById('user-inquiries-tbody');
+      try {
+        const res = await ApiService.getUserInquiries();
+        const inquiries = res.data || [];
+
+        if (inquiries.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="5" style="text-align:center; padding:3rem;" class="empty-state">
+                <i class="fa-solid fa-inbox empty-state-icon"></i>
+                <h3 class="empty-state-title">No Inquiries Submitted</h3>
+                <p class="empty-state-desc">When you request a private tour or info on a property, your message will appear here.</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = inquiries.map(inq => `
+          <tr>
+            <td>
+              <a href="/property-details.html?id=${inq.property ? inq.property.id : '#'}" style="font-weight:600; color:var(--text);" target="_blank">
+                ${Utils.escapeHtml(inq.property ? inq.property.title : 'General Estate')}
+              </a>
+              <div style="font-size:11px; color:var(--text-muted);">${inq.property ? inq.property.locality + ', ' + inq.property.city : ''}</div>
+            </td>
+            <td>
+              <div style="font-weight:500; font-size:13px;">${Utils.escapeHtml(inq.property && inq.property.agent ? inq.property.agent.name : 'Senior Concierge')}</div>
+            </td>
+            <td>
+              <div style="max-width:320px; font-size:12px; color:var(--text); line-height:1.5;">${Utils.escapeHtml(inq.message)}</div>
+            </td>
+            <td>
+              <span class="badge ${inq.status === 'RESPONDED' ? 'badge-approved' : 'badge-pending'}">
+                ${inq.status}
+              </span>
+            </td>
+            <td style="font-size:12px; color:var(--text-muted);">
+              ${Utils.formatDate(inq.createdAt)}
+            </td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="5" style="color:var(--danger); text-align:center;">Failed to load inquiries.</td></tr>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadUserInquiries();
+    });
+  </script>
+</body>
+</html>

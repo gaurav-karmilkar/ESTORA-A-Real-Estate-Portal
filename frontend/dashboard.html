@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings | ESTORA Luxury Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="container-fluid nav-container">
+      <a href="/index.html" class="nav-brand">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        ESTORA
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/agents.html" class="nav-link">Agents</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div id="nav-user-actions"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-user-card">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80" alt="Avatar" id="sidebar-user-avatar" class="sidebar-avatar">
+        <div>
+          <div class="sidebar-user-name" id="sidebar-user-name">User Name</div>
+          <div class="sidebar-user-role" id="sidebar-user-role">MEMBER</div>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li>
+          <a href="/dashboard.html" class="sidebar-link active">
+            <i class="fa-solid fa-user-gear"></i> Profile & Settings
+          </a>
+        </li>
+        <li>
+          <a href="/favorites.html" class="sidebar-link">
+            <i class="fa-solid fa-heart"></i> Saved Properties
+          </a>
+        </li>
+        <li>
+          <a href="/inquiries.html" class="sidebar-link">
+            <i class="fa-solid fa-envelope-open-text"></i> My Inquiries
+          </a>
+        </li>
+        <li style="margin-top:auto;">
+          <a href="javascript:void(0)" onclick="Auth.logout()" class="sidebar-link" style="color:var(--danger);">
+            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="dash-header">
+        <div>
+          <h1 class="dash-title">Profile <span class="script-accent">Settings</span></h1>
+          <p class="dash-subtitle">Manage your personal credentials, contact details, and preferences</p>
+        </div>
+      </div>
+
+      <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-xs); padding:2.5rem; max-width:650px;">
+        <form id="profile-form" onsubmit="handleProfileUpdate(event)">
+          <div class="form-group" style="margin-bottom:1.5rem;">
+            <label class="form-label">Full Legal Name</label>
+            <input type="text" id="profile-name" class="form-control" required>
+          </div>
+
+          <div class="form-group" style="margin-bottom:1.5rem;">
+            <label class="form-label">Email Address (Read-only)</label>
+            <input type="email" id="profile-email" class="form-control" readonly style="background:var(--surface-alt); cursor:not-allowed;">
+          </div>
+
+          <div class="form-group" style="margin-bottom:1.5rem;">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" id="profile-phone" class="form-control">
+          </div>
+
+          <div class="form-group" style="margin-bottom:1.5rem;">
+            <label class="form-label">Avatar Image URL</label>
+            <input type="url" id="profile-avatar" class="form-control" placeholder="https://images.unsplash.com/...">
+          </div>
+
+          <div id="agent-agency-field" class="form-group" style="margin-bottom:1.5rem; display:none;">
+            <label class="form-label">Brokerage / Agency</label>
+            <input type="text" id="profile-agency" class="form-control">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" id="profile-submit-btn">
+            Save Changes
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    function loadProfile() {
+      const user = Auth.requireAuth();
+      if (!user) return;
+
+      document.getElementById('profile-name').value = user.name || '';
+      document.getElementById('profile-email').value = user.email || '';
+      document.getElementById('profile-phone').value = user.phone || '';
+      document.getElementById('profile-avatar').value = user.avatarUrl || '';
+
+      if (user.role === 'AGENT') {
+        document.getElementById('agent-agency-field').style.display = 'block';
+        document.getElementById('profile-agency').value = user.agency || '';
+      }
+    }
+
+    async function handleProfileUpdate(e) {
+      e.preventDefault();
+      const btn = document.getElementById('profile-submit-btn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = 'Saving...';
+      btn.disabled = true;
+
+      try {
+        const name = document.getElementById('profile-name').value;
+        const phone = document.getElementById('profile-phone').value;
+        const avatarUrl = document.getElementById('profile-avatar').value;
+        const agency = document.getElementById('profile-agency').value;
+
+        const res = await ApiService.updateProfile({ name, phone, avatarUrl, agency });
+        Auth.setUser(res.data);
+        Utils.showToast('Profile updated successfully!', 'success');
+      } catch (err) {
+        Utils.showToast(err.message || 'Failed to update profile', 'error');
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProfile();
+    });
+  </script>
+</body>
+</html>

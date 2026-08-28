@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Properties Portfolio | ESTORA Luxury Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="nav-brand">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        ESTORA
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html?listingType=BUY" class="nav-link" id="nav-buy-link">Buy</a></li>
+        <li><a href="/properties.html?listingType=RENT" class="nav-link" id="nav-rent-link">Rent</a></li>
+        <li><a href="/properties.html" class="nav-link active">Properties</a></li>
+        <li><a href="/agents.html" class="nav-link">Agents</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button 
+          type="button" 
+          class="theme-toggle-btn" 
+          id="theme-toggle" 
+          onclick="ThemeManager.toggleTheme()" 
+          title="Toggle Theme"
+          aria-label="Toggle Night/Day Theme"
+        >
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div id="nav-user-actions"></div>
+        <button class="nav-toggle" onclick="document.getElementById('nav-menu').classList.toggle('show')" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header style="background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 3.5rem 0 3rem 0;">
+    <div class="container text-center">
+      <span class="section-subtitle">DISCOVER</span>
+      <h1 style="font-size: clamp(2.4rem, 4.5vw, 3.6rem); margin-bottom: 0.5rem;">
+        Exceptional <span class="script-accent">Properties</span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 13.5px; max-width: 620px; margin: 0 auto 1.75rem auto; line-height: 1.7;">
+        Explore verified residences, signature penthouses, and architectural estates curated across India's premier luxury corridors.
+      </p>
+
+      <!-- Horizontal Quick Search Bar -->
+      <form class="property-search-bar" id="quick-search-form" onsubmit="handleQuickSearch(event)">
+        <!-- Location / Enclave -->
+        <div class="search-bar-field">
+          <i class="fa-solid fa-location-dot"></i>
+          <input 
+            type="text" 
+            id="quick-location" 
+            placeholder="Search locality, city or landmark..."
+            autocomplete="off"
+          >
+        </div>
+
+        <!-- Property Type -->
+        <div class="search-bar-field">
+          <i class="fa-solid fa-building"></i>
+          <select id="quick-property-type" aria-label="Property Type">
+            <option value="ALL">All Estate Types</option>
+            <option value="APARTMENT">Apartments</option>
+            <option value="VILLA">Villas</option>
+            <option value="HOUSE">Houses</option>
+            <option value="PLOT">Plots</option>
+            <option value="COMMERCIAL">Commercial</option>
+          </select>
+        </div>
+
+        <!-- Acquisition (Buy / Rent) -->
+        <div class="search-bar-field">
+          <i class="fa-solid fa-arrow-right-arrow-left"></i>
+          <select id="quick-listing-type" aria-label="Acquisition Type">
+            <option value="ALL">Buy & Rent</option>
+            <option value="BUY">For Sale</option>
+            <option value="RENT">For Rent</option>
+          </select>
+        </div>
+
+        <!-- Max Budget -->
+        <div class="search-bar-field">
+          <i class="fa-solid fa-indian-rupee-sign"></i>
+          <select id="quick-max-price" aria-label="Budget Limit">
+            <option value="">Any Budget</option>
+            <option value="5000000">Up to ₹50 Lakhs</option>
+            <option value="10000000">Up to ₹1 Crore</option>
+            <option value="25000000">Up to ₹2.5 Crores</option>
+            <option value="50000000">Up to ₹5 Crores</option>
+            <option value="100000000">Up to ₹10 Crores</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="search-bar-btn" id="quick-search-btn">
+          <i class="fa-solid fa-magnifying-glass"></i> SEARCH
+        </button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Main Listing Layout -->
+  <div class="listing-layout">
+    <!-- Refined Filter Sidebar -->
+    <aside class="filter-sidebar" id="filter-sidebar">
+      <div class="filter-header">
+        <h3 class="filter-header-title">Filter Properties</h3>
+        <button type="button" class="filter-reset-btn" onclick="Properties.clearAllFilters()">
+          Reset All
+        </button>
+      </div>
+
+      <form id="property-filter-form" onsubmit="handleFilterSubmit(event)">
+        <!-- Keyword / Locality -->
+        <div class="filter-group">
+          <label class="filter-title" for="filter-location">KEYWORD / LOCALITY</label>
+          <div class="input-icon-group">
+            <i class="fa-solid fa-magnifying-glass input-icon-left" style="font-size:0.85rem;"></i>
+            <input 
+              type="text" 
+              id="filter-location" 
+              class="form-control" 
+              placeholder="e.g. Bandra, Indiranagar..." 
+              style="padding-left: 36px;"
+            >
+          </div>
+        </div>
+
+        <!-- Acquisition Type (All, Buy, Rent) -->
+        <div class="filter-group">
+          <label class="filter-title">ACQUISITION TYPE</label>
+          <div class="filter-pill-group">
+            <button type="button" class="filter-chip active" id="type-btn-all" onclick="setFilterListingType('ALL', this)">ALL</button>
+            <button type="button" class="filter-chip" id="type-btn-buy" onclick="setFilterListingType('BUY', this)">BUY</button>
+            <button type="button" class="filter-chip" id="type-btn-rent" onclick="setFilterListingType('RENT', this)">RENT</button>
+          </div>
+          <input type="hidden" id="filter-listing-type" value="">
+        </div>
+
+        <!-- City Corridor -->
+        <div class="filter-group">
+          <label class="filter-title" for="filter-city">CITY CORRIDOR</label>
+          <select id="filter-city" class="form-control">
+            <option value="ALL">All Enclaves</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Pune">Pune</option>
+            <option value="Delhi">Delhi NCR</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Nagpur">Nagpur</option>
+          </select>
+        </div>
+
+        <!-- Estate Type -->
+        <div class="filter-group">
+          <label class="filter-title" for="filter-property-type">ESTATE TYPE</label>
+          <select id="filter-property-type" class="form-control">
+            <option value="ALL">All Types</option>
+            <option value="APARTMENT">Luxury Apartment</option>
+            <option value="VILLA">Private Villa</option>
+            <option value="HOUSE">Independent House</option>
+            <option value="PLOT">Residential Plot</option>
+            <option value="COMMERCIAL">Commercial Estate</option>
+            <option value="OFFICE">Corporate Office</option>
+          </select>
+        </div>
+
+        <!-- Bedrooms (BHK) -->
+        <div class="filter-group">
+          <label class="filter-title">BEDROOMS (BHK)</label>
+          <div class="filter-bhk-group">
+            <button type="button" class="filter-chip bhk-btn active" data-bhk="0" onclick="setFilterBhk(0, this)">Any</button>
+            <button type="button" class="filter-chip bhk-btn" data-bhk="1" onclick="setFilterBhk(1, this)">1+</button>
+            <button type="button" class="filter-chip bhk-btn" data-bhk="2" onclick="setFilterBhk(2, this)">2+</button>
+            <button type="button" class="filter-chip bhk-btn" data-bhk="3" onclick="setFilterBhk(3, this)">3+</button>
+            <button type="button" class="filter-chip bhk-btn" data-bhk="4" onclick="setFilterBhk(4, this)">4+</button>
+          </div>
+          <input type="hidden" id="filter-bedrooms" value="0">
+        </div>
+
+        <!-- Price Range -->
+        <div class="filter-group">
+          <label class="filter-title">PRICE RANGE (₹)</label>
+          <div class="price-input-row">
+            <div class="price-field">
+              <span class="price-field-symbol">₹</span>
+              <input type="number" id="filter-min-price" class="form-control" placeholder="Min" min="0">
+            </div>
+            <div class="price-field">
+              <span class="price-field-symbol">₹</span>
+              <input type="number" id="filter-max-price" class="form-control" placeholder="Max" min="0">
+            </div>
+          </div>
+        </div>
+
+        <!-- Furnishing Status -->
+        <div class="filter-group">
+          <label class="filter-title" for="filter-furnishing">FURNISHING STATUS</label>
+          <select id="filter-furnishing" class="form-control">
+            <option value="ALL">Any Furnishing</option>
+            <option value="FURNISHED">Fully Furnished</option>
+            <option value="SEMI_FURNISHED">Semi Furnished</option>
+            <option value="UNFURNISHED">Unfurnished</option>
+          </select>
+        </div>
+
+        <!-- Key Amenities -->
+        <div class="filter-group">
+          <label class="filter-title">KEY AMENITIES</label>
+          <label class="checkbox-label"><input type="checkbox" name="filter-amenity" value="Parking"> Parking Bay</label>
+          <label class="checkbox-label"><input type="checkbox" name="filter-amenity" value="Swimming Pool"> Swimming Pool</label>
+          <label class="checkbox-label"><input type="checkbox" name="filter-amenity" value="Gym"> Fitness Studio</label>
+          <label class="checkbox-label"><input type="checkbox" name="filter-amenity" value="Security"> 24/7 Concierge & Security</label>
+          <label class="checkbox-label"><input type="checkbox" name="filter-amenity" value="Balcony"> Panoramic Balcony</label>
+          <label class="checkbox-label"><input type="checkbox" name="filter-amenity" value="Lift"> Private Elevator</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-block" style="height: 48px; font-size: 11px; letter-spacing: 0.16em; font-weight: 600; text-transform: uppercase;">
+          APPLY FILTERS
+        </button>
+      </form>
+    </aside>
+
+    <!-- Main Results Section -->
+    <main>
+      <!-- Results Control Bar -->
+      <div class="results-bar">
+        <div class="results-count-label" id="total-properties-count">
+          Loading Curated Estates...
+        </div>
+
+        <div class="results-controls">
+          <!-- Mobile Filter Button Trigger -->
+          <button 
+            type="button" 
+            class="btn btn-outline btn-sm mobile-filter-trigger" 
+            onclick="toggleMobileSidebar()"
+            aria-label="Toggle Filter Options"
+          >
+            <i class="fa-solid fa-sliders"></i> Filters
+          </button>
+
+          <!-- Sort Select -->
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <label for="sort-select" style="font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-muted);">
+              SORT:
+            </label>
+            <select id="sort-select" class="form-control" style="width:auto; padding:0.45rem 0.75rem; font-size:11.5px;" onchange="handleSortChange(this.value)">
+              <option value="createdAt-DESC">Newest Curations</option>
+              <option value="price-ASC">Price: Low to High</option>
+              <option value="price-DESC">Price: High to Low</option>
+              <option value="area-DESC">Area: Large to Small</option>
+            </select>
+          </div>
+
+          <!-- View Mode Toggle (Grid / List) -->
+          <div class="view-mode-group">
+            <button 
+              type="button" 
+              class="view-mode-btn active" 
+              id="view-mode-grid" 
+              onclick="setViewMode('grid')" 
+              title="Grid View"
+              aria-label="Grid View"
+            >
+              <i class="fa-solid fa-grip"></i>
+            </button>
+            <button 
+              type="button" 
+              class="view-mode-btn" 
+              id="view-mode-list" 
+              onclick="setViewMode('list')" 
+              title="List View"
+              aria-label="List View"
+            >
+              <i class="fa-solid fa-list"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Properties Results Grid -->
+      <div class="property-grid" id="properties-results-grid">
+        <!-- Rendered by properties.js -->
+      </div>
+
+      <!-- Pagination Container -->
+      <div id="properties-pagination"></div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <span class="logo-icon" style="border-color:#ffffff; color:#ffffff;"><i class="fa-solid fa-gem"></i></span>
+            ESTORA
+          </div>
+          <p class="footer-tagline">
+            An editorial sanctuary representing architectural estates, verified penthouses, and premier luxury investments across India's metropolitan corridors.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Portfolio</div>
+          <ul class="footer-links">
+            <li><a href="/properties.html?listingType=BUY" class="footer-link">Residences for Sale</a></li>
+            <li><a href="/properties.html?listingType=RENT" class="footer-link">Signature Leases</a></li>
+            <li><a href="/properties.html?propertyType=VILLA" class="footer-link">Private Villas</a></li>
+            <li><a href="/properties.html?propertyType=APARTMENT" class="footer-link">Penthouses & Suites</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Enclaves</div>
+          <ul class="footer-links">
+            <li><a href="/properties.html?city=Mumbai" class="footer-link">Mumbai Coastal</a></li>
+            <li><a href="/properties.html?city=Bengaluru" class="footer-link">Bengaluru Tech Garden</a></li>
+            <li><a href="/properties.html?city=Delhi" class="footer-link">Delhi NCR Capital</a></li>
+            <li><a href="/properties.html?city=Pune" class="footer-link">Pune Hills</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="/about.html" class="footer-link">About Estora</a></li>
+            <li><a href="/agents.html" class="footer-link">Certified Advisors</a></li>
+            <li><a href="/contact.html" class="footer-link">Private Concierge</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Client Access</div>
+          <ul class="footer-links">
+            <li><a href="/login.html" class="footer-link">Member Sign In</a></li>
+            <li><a href="/register.html" class="footer-link">Create Account</a></li>
+            <li><a href="/favorites.html" class="footer-link">Saved Properties</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 ESTORA Luxury Real Estate Editorial. All rights reserved.</div>
+        <div>Curated Architectural Residences & Certified Local Advisors</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/favorites.js"></script>
+  <script src="/js/properties.js"></script>
+  <script>
+    let currentViewMode = 'grid';
+
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      const grid = document.getElementById('properties-results-grid');
+      const gridBtn = document.getElementById('view-mode-grid');
+      const listBtn = document.getElementById('view-mode-list');
+      
+      if (mode === 'list') {
+        grid.classList.add('list-mode');
+        listBtn.classList.add('active');
+        gridBtn.classList.remove('active');
+      } else {
+        grid.classList.remove('list-mode');
+        gridBtn.classList.add('active');
+        listBtn.classList.remove('active');
+      }
+    }
+
+    function toggleMobileSidebar() {
+      const sidebar = document.getElementById('filter-sidebar');
+      if (sidebar) {
+        sidebar.classList.toggle('mobile-open');
+        if (sidebar.classList.contains('mobile-open')) {
+          sidebar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    function setFilterListingType(type, btn) {
+      document.getElementById('filter-listing-type').value = type === 'ALL' ? '' : type;
+      document.querySelectorAll('.filter-pill-group .filter-chip').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+    function setFilterBhk(bhk, btn) {
+      document.getElementById('filter-bedrooms').value = bhk;
+      document.querySelectorAll('.bhk-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+    function handleQuickSearch(e) {
+      e.preventDefault();
+      const qLoc = document.getElementById('quick-location').value.trim();
+      const qType = document.getElementById('quick-property-type').value;
+      const qListing = document.getElementById('quick-listing-type').value;
+      const qMaxPrice = document.getElementById('quick-max-price').value;
+
+      if (qLoc) document.getElementById('filter-location').value = qLoc;
+      if (qType && qType !== 'ALL') document.getElementById('filter-property-type').value = qType;
+      
+      if (qListing && qListing !== 'ALL') {
+        const btn = document.getElementById(`type-btn-${qListing.toLowerCase()}`);
+        if (btn) setFilterListingType(qListing, btn);
+      } else if (qListing === 'ALL') {
+        setFilterListingType('ALL', document.getElementById('type-btn-all'));
+      }
+
+      if (qMaxPrice) document.getElementById('filter-max-price').value = qMaxPrice;
+
+      handleFilterSubmit(new Event('submit'));
+    }
+
+    function handleFilterSubmit(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const params = new URLSearchParams();
+
+      const location = document.getElementById('filter-location').value.trim();
+      const listingType = document.getElementById('filter-listing-type').value;
+      const city = document.getElementById('filter-city').value;
+      const propertyType = document.getElementById('filter-property-type').value;
+      const bedrooms = document.getElementById('filter-bedrooms').value;
+      const minPrice = document.getElementById('filter-min-price').value;
+      const maxPrice = document.getElementById('filter-max-price').value;
+      const furnishing = document.getElementById('filter-furnishing').value;
+
+      const checkedAmenities = Array.from(document.querySelectorAll('input[name="filter-amenity"]:checked')).map(cb => cb.value);
+
+      if (location) params.set('location', location);
+      if (listingType) params.set('listingType', listingType);
+      if (city && city !== 'ALL') params.set('city', city);
+      if (propertyType && propertyType !== 'ALL') params.set('propertyType', propertyType);
+      if (bedrooms && bedrooms !== '0') params.set('bedrooms', bedrooms);
+      if (minPrice) params.set('minPrice', minPrice);
+      if (maxPrice) params.set('maxPrice', maxPrice);
+      if (furnishing && furnishing !== 'ALL') params.set('furnishing', furnishing);
+      if (checkedAmenities.length > 0) params.set('amenities', checkedAmenities.join(','));
+
+      const sortVal = document.getElementById('sort-select').value.split('-');
+      params.set('sort', sortVal[0]);
+      params.set('direction', sortVal[1]);
+
+      window.history.pushState({}, '', `${window.location.pathname}?${params.toString()}`);
+      syncFiltersAndLoad();
+
+      // Close mobile sidebar after search if on mobile
+      const sidebar = document.getElementById('filter-sidebar');
+      if (sidebar && sidebar.classList.contains('mobile-open')) {
+        sidebar.classList.remove('mobile-open');
+      }
+    }
+
+    function handleSortChange(val) {
+      const [sort, direction] = val.split('-');
+      const params = new URLSearchParams(window.location.search);
+      params.set('sort', sort);
+      params.set('direction', direction);
+      window.history.pushState({}, '', `${window.location.pathname}?${params.toString()}`);
+      syncFiltersAndLoad();
+    }
+
+    function syncFiltersAndLoad() {
+      const params = new URLSearchParams(window.location.search);
+      const queryObj = {};
+      for (const [k, v] of params.entries()) {
+        queryObj[k] = v;
+      }
+      Properties.loadProperties(queryObj);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      
+      if (params.get('location')) {
+        document.getElementById('filter-location').value = params.get('location');
+        document.getElementById('quick-location').value = params.get('location');
+      }
+      if (params.get('city')) document.getElementById('filter-city').value = params.get('city');
+      if (params.get('propertyType')) {
+        document.getElementById('filter-property-type').value = params.get('propertyType');
+        document.getElementById('quick-property-type').value = params.get('propertyType');
+      }
+      if (params.get('furnishing')) document.getElementById('filter-furnishing').value = params.get('furnishing');
+      if (params.get('minPrice')) document.getElementById('filter-min-price').value = params.get('minPrice');
+      if (params.get('maxPrice')) {
+        document.getElementById('filter-max-price').value = params.get('maxPrice');
+        document.getElementById('quick-max-price').value = params.get('maxPrice');
+      }
+      
+      const listingType = params.get('listingType');
+      if (listingType === 'BUY') {
+        setFilterListingType('BUY', document.getElementById('type-btn-buy'));
+        document.getElementById('quick-listing-type').value = 'BUY';
+      } else if (listingType === 'RENT') {
+        setFilterListingType('RENT', document.getElementById('type-btn-rent'));
+        document.getElementById('quick-listing-type').value = 'RENT';
+      } else {
+        setFilterListingType('ALL', document.getElementById('type-btn-all'));
+        document.getElementById('quick-listing-type').value = 'ALL';
+      }
+
+      if (params.get('bedrooms')) {
+        const bhkBtn = document.querySelector(`.bhk-btn[data-bhk="${params.get('bedrooms')}"]`);
+        if (bhkBtn) setFilterBhk(params.get('bedrooms'), bhkBtn);
+      }
+
+      if (params.get('sort') && params.get('direction')) {
+        document.getElementById('sort-select').value = `${params.get('sort')}-${params.get('direction')}`;
+      }
+
+      syncFiltersAndLoad();
+    });
+  </script>
+</body>
+</html>

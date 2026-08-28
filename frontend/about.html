@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About ESTORA | Luxury Real Estate Editorial & Heritage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="nav-brand">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        ESTORA
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html?listingType=BUY" class="nav-link">Buy</a></li>
+        <li><a href="/properties.html?listingType=RENT" class="nav-link">Rent</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/agents.html" class="nav-link">Agents</a></li>
+        <li><a href="/about.html" class="nav-link active">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button 
+          type="button" 
+          class="theme-toggle-btn" 
+          id="theme-toggle" 
+          onclick="ThemeManager.toggleTheme()" 
+          title="Toggle Theme"
+          aria-label="Toggle Night/Day Theme"
+        >
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div id="nav-user-actions"></div>
+        <button class="nav-toggle" onclick="document.getElementById('nav-menu').classList.toggle('show')" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div style="background:var(--bg-card); border-bottom:1px solid var(--border); padding:4.5rem 0 3.5rem 0;">
+    <div class="container text-center">
+      <span class="section-subtitle">EDITORIAL PHILOSOPHY & HERITAGE</span>
+      <h1 style="font-size:clamp(2.4rem, 4.5vw, 3.75rem); margin-bottom:0.75rem;">The Estora <span class="script-accent">Standard</span></h1>
+      <p class="section-desc" style="max-width:680px; margin:0 auto; line-height:1.8;">
+        An editorial sanctuary representing architectural residences, verified penthouses, and private estates across India's premier metropolitan corridors with uncompromising transparency and concierge representation.
+      </p>
+    </div>
+  </div>
+
+  <div class="container" style="margin:4.5rem auto 6rem auto;">
+    
+    <!-- Brand Story & Essence -->
+    <div style="display:grid; grid-template-columns: 1.15fr 0.85fr; gap:3.5rem; align-items:center; margin-bottom:5.5rem;" class="about-hero-grid">
+      <div>
+        <span class="section-subtitle">OUR FOUNDING VISION</span>
+        <h2 style="font-size:clamp(2rem, 3.2vw, 2.8rem); line-height:1.2; margin-bottom:1.5rem;">
+          Where Architectural Distinction Meets <span class="script-accent">Trust</span>
+        </h2>
+        <p style="color:var(--text); line-height:1.9; font-size:14.5px; margin-bottom:1.25rem;">
+          ESTORA was founded on a singular conviction: that acquiring exceptional living spaces should be as refined, transparent, and inspiring as the architecture itself. In an era of cluttered real estate portals, ESTORA stands as a curated sanctuary where every home is hand-selected for its spatial integrity, verified provenance, and timeless aesthetic value.
+        </p>
+        <p style="color:var(--text-muted); line-height:1.85; font-size:13.5px; margin-bottom:1.75rem;">
+          From sea-facing promenades in Mumbai to heritage bungalows in Delhi NCR and verdant villas in Bengaluru, we partner exclusively with certified advisors, visionary architects, and discerning property owners to curate an uncompromised standard of living.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1.25rem; border-top:1px solid var(--border); padding-top:1.5rem; margin-top:1.5rem;">
+          <div>
+            <div style="font-family:var(--font-display); font-size:2.2rem; font-weight:500; color:var(--text-dark);">100%</div>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-muted);">VERIFIED TITLES</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-display); font-size:2.2rem; font-weight:500; color:var(--text-dark);">6+</div>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-muted);">PRIME ENCLAVES</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-display); font-size:2.2rem; font-weight:500; color:var(--text-dark);">24/7</div>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-muted);">CONCIERGE DESK</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Architectural Feature Card -->
+      <div style="position:relative; border-radius:var(--radius-xs); overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow-md);">
+        <img 
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85" 
+          alt="Estora Architectural Interior" 
+          style="width:100%; height:440px; object-fit:cover; display:block;"
+        >
+        <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(180deg, transparent 0%, rgba(17,17,17,0.88) 100%); padding:2rem 1.75rem; color:#ffffff;">
+          <div style="font-size:9px; font-weight:600; letter-spacing:0.24em; text-transform:uppercase; color:var(--accent); margin-bottom:0.4rem;">
+            THE CURATION CODE
+          </div>
+          <div style="font-family:var(--font-display); font-size:1.35rem; font-weight:400; line-height:1.3;">
+            "We do not list everything. We curate what is exceptional."
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 4 Pillars of ESTORA -->
+    <div style="margin-bottom:6rem;">
+      <div class="section-header text-center" style="margin-bottom:3rem;">
+        <span class="section-subtitle">THE ESTORA COMMITMENT</span>
+        <h2 class="section-title">Four Pillars of <span class="script-accent">Excellence</span></h2>
+        <p class="section-desc" style="max-width:600px; margin:0 auto;">
+          Our uncompromising framework guarantees peace of mind at every stage of discovery and acquisition.
+        </p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1.75rem;" class="about-pillars-grid">
+        
+        <!-- Pillar 1 -->
+        <div style="padding:2rem; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-xs); transition:var(--transition-fast);">
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+            <span style="font-family:var(--font-display); font-size:1.5rem; font-weight:600; color:var(--accent);">01</span>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted);">CURATION</div>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; font-weight:500; margin-bottom:0.65rem; color:var(--text-dark);">
+            Architectural & Spatial Audit
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.75;">
+            Every prospective residence is personally evaluated on ceiling heights, natural illumination, ventilation orientation, materials palette, and acoustic privacy. Only top-tier properties earn inclusion.
+          </p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div style="padding:2rem; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-xs); transition:var(--transition-fast);">
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+            <span style="font-family:var(--font-display); font-size:1.5rem; font-weight:600; color:var(--accent);">02</span>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted);">INTEGRITY</div>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; font-weight:500; margin-bottom:0.65rem; color:var(--text-dark);">
+            Verified Title & Legal Provenance
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.75;">
+            Zero ambiguity. All estate listings are backed by verified RERA clearances, ownership certificates, clear land titles, and verified square footage specifications before being published.
+          </p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div style="padding:2rem; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-xs); transition:var(--transition-fast);">
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+            <span style="font-family:var(--font-display); font-size:1.5rem; font-weight:600; color:var(--accent);">03</span>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted);">ADVISORY</div>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; font-weight:500; margin-bottom:0.65rem; color:var(--text-dark);">
+            Certified Private Representation
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.75;">
+            No generic call centers or pushy sales calls. You are paired with licensed neighborhood specialists who provide bespoke market intelligence, off-market insight, and discreet contract negotiation.
+          </p>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div style="padding:2rem; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-xs); transition:var(--transition-fast);">
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+            <span style="font-family:var(--font-display); font-size:1.5rem; font-weight:600; color:var(--accent);">04</span>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted);">EXPERIENCE</div>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; font-weight:500; margin-bottom:0.65rem; color:var(--text-dark);">
+            High-Definition Digital Discovery
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.75;">
+            Interactive architectural galleries, carpet area breakdowns, verified amenities, and direct advisor scheduling allow you to explore residences with complete clarity from any device.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Contact Concierge Section -->
+    <div id="contact-section" style="background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-xs); padding:4rem 3rem;">
+      <div class="section-header text-center" style="margin-bottom:2.5rem;">
+        <span class="section-subtitle">PRIVATE CONCIERGE</span>
+        <h2 class="section-title">Connect with <span class="script-accent">Estora</span></h2>
+        <p class="section-desc">For confidential acquisitions, private viewings, or property representation inquiries.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2rem; text-align:center;" class="testimonials-grid">
+        <div style="background:var(--bg-card); padding:2rem; border:1px solid var(--border); border-radius:var(--radius-xs);">
+          <i class="fa-solid fa-envelope" style="font-size:1.75rem; margin-bottom:1rem; display:block; color:var(--text-dark);"></i>
+          <div style="font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.4rem;">EMAIL ADVISORY</div>
+          <a href="mailto:concierge@estora.com" style="color:var(--text-dark); font-weight:500; font-size:14px;">concierge@estora.com</a>
+        </div>
+
+        <div style="background:var(--bg-card); padding:2rem; border:1px solid var(--border); border-radius:var(--radius-xs);">
+          <i class="fa-solid fa-phone" style="font-size:1.75rem; margin-bottom:1rem; display:block; color:var(--text-dark);"></i>
+          <div style="font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.4rem;">DIRECT CONCIERGE</div>
+          <a href="tel:+919800011111" style="color:var(--text-dark); font-weight:500; font-size:14px;">+91 98000 11111</a>
+        </div>
+
+        <div style="background:var(--bg-card); padding:2rem; border:1px solid var(--border); border-radius:var(--radius-xs);">
+          <i class="fa-solid fa-building" style="font-size:1.75rem; margin-bottom:1rem; display:block; color:var(--text-dark);"></i>
+          <div style="font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.4rem;">FLAGSHIP GALLERIES</div>
+          <span style="color:var(--text-dark); font-weight:500; font-size:14px;">Mumbai • Bengaluru • Delhi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <span class="logo-icon" style="border-color:#ffffff; color:#ffffff;"><i class="fa-solid fa-gem"></i></span>
+            ESTORA
+          </div>
+          <p class="footer-tagline">
+            An editorial sanctuary representing architectural estates, verified penthouses, and premier luxury investments across India's metropolitan corridors.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Portfolio</div>
+          <ul class="footer-links">
+            <li><a href="/properties.html?listingType=BUY" class="footer-link">Residences for Sale</a></li>
+            <li><a href="/properties.html?listingType=RENT" class="footer-link">Signature Leases</a></li>
+            <li><a href="/properties.html?propertyType=VILLA" class="footer-link">Private Villas</a></li>
+            <li><a href="/properties.html?propertyType=APARTMENT" class="footer-link">Penthouses & Suites</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Enclaves</div>
+          <ul class="footer-links">
+            <li><a href="/properties.html?city=Mumbai" class="footer-link">Mumbai Coastal</a></li>
+            <li><a href="/properties.html?city=Bengaluru" class="footer-link">Bengaluru Tech Garden</a></li>
+            <li><a href="/properties.html?city=Delhi" class="footer-link">Delhi NCR Capital</a></li>
+            <li><a href="/properties.html?city=Pune" class="footer-link">Pune Hills</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="/about.html" class="footer-link">About Estora</a></li>
+            <li><a href="/agents.html" class="footer-link">Certified Advisors</a></li>
+            <li><a href="/about.html#contact-section" class="footer-link">Private Concierge</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Client Access</div>
+          <ul class="footer-links">
+            <li><a href="/login.html" class="footer-link">Member Sign In</a></li>
+            <li><a href="/register.html" class="footer-link">Create Account</a></li>
+            <li><a href="/favorites.html" class="footer-link">Saved Properties</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 ESTORA Luxury Real Estate Editorial. All rights reserved.</div>
+        <div>Curated Architectural Residences & Certified Local Advisors</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

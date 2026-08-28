@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESTORA | Luxury Real Estate Editorial</title>
+  <meta name="description" content="Discover architecturally distinct villas, luxury apartments, and premium commercial estates with verified agents and transparent pricing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="nav-brand">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        ESTORA
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/index.html" class="nav-link active">Home</a></li>
+        <li><a href="/properties.html?listingType=BUY" class="nav-link">Buy</a></li>
+        <li><a href="/properties.html?listingType=RENT" class="nav-link">Rent</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/agents.html" class="nav-link">Agents</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div id="nav-user-actions">
+          <!-- Populated by auth.js -->
+        </div>
+        <button class="nav-toggle" onclick="document.getElementById('nav-menu').classList.toggle('show')">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section (Luxury Real Estate Editorial) -->
+  <header class="hero-editorial">
+    <div class="container">
+      <div class="hero-editorial-wrapper">
+        <span class="hero-eyebrow">EXCLUSIVE REAL ESTATE EDITORIAL</span>
+        
+        <h1 class="hero-editorial-title">
+          <span class="title-top">FIND YOUR</span>
+          <span class="title-main">Perfect <span class="title-script">Home</span></span>
+        </h1>
+
+        <p class="hero-editorial-desc">
+          Explore architecturally distinct villas, luxury residences, and prime commercial estates with certified documentation and trusted local advisors.
+        </p>
+
+        <!-- Quick Circular Navigation (Reference Style) -->
+        <div class="hero-quick-nav">
+          <a href="/about.html" class="quick-nav-item">
+            <div class="quick-nav-circle"><i class="fa-regular fa-user"></i></div>
+            <span class="quick-nav-label">About</span>
+          </a>
+          <a href="/properties.html" class="quick-nav-item">
+            <div class="quick-nav-circle"><i class="fa-regular fa-building"></i></div>
+            <span class="quick-nav-label">Listings</span>
+          </a>
+          <a href="#services-section" class="quick-nav-item">
+            <div class="quick-nav-circle"><i class="fa-regular fa-handshake"></i></div>
+            <span class="quick-nav-label">Services</span>
+          </a>
+          <a href="#why-choose-section" class="quick-nav-item">
+            <div class="quick-nav-circle"><i class="fa-regular fa-circle-question"></i></div>
+            <span class="quick-nav-label">Why Us</span>
+          </a>
+          <a href="#testimonials-section" class="quick-nav-item">
+            <div class="quick-nav-circle"><i class="fa-regular fa-star"></i></div>
+            <span class="quick-nav-label">Reviews</span>
+          </a>
+          <a href="/about.html#contact-section" class="quick-nav-item">
+            <div class="quick-nav-circle"><i class="fa-regular fa-envelope"></i></div>
+            <span class="quick-nav-label">Contact</span>
+          </a>
+        </div>
+
+        <!-- Search Box Widget -->
+        <div class="search-widget">
+          <div class="search-tabs">
+            <button class="search-tab-btn active" data-type="BUY" onclick="setListingType('BUY', this)">
+              For Purchase
+            </button>
+            <button class="search-tab-btn" data-type="RENT" onclick="setListingType('RENT', this)">
+              For Lease
+            </button>
+          </div>
+
+          <form id="hero-search-form" onsubmit="handleHeroSearch(event)">
+            <div class="search-grid">
+              <div class="form-group">
+                <label class="form-label">Location / Keyword</label>
+                <input type="text" id="hero-search-location" class="form-control" placeholder="City, locality, or landmark...">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Property Type</label>
+                <select id="hero-search-type" class="form-control">
+                  <option value="ALL">All Types</option>
+                  <option value="APARTMENT">Apartment</option>
+                  <option value="VILLA">Luxury Villa</option>
+                  <option value="HOUSE">Independent House</option>
+                  <option value="PLOT">Residential Plot</option>
+                  <option value="COMMERCIAL">Commercial Estate</option>
+                  <option value="OFFICE">Office Suite</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Bedrooms</label>
+                <select id="hero-search-bedrooms" class="form-control">
+                  <option value="0">Any BHK</option>
+                  <option value="1">1+ BHK</option>
+                  <option value="2">2+ BHK</option>
+                  <option value="3">3+ BHK</option>
+                  <option value="4">4+ BHK</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Max Budget</label>
+                <select id="hero-search-budget" class="form-control">
+                  <option value="">Any Budget</option>
+                  <option value="50000">Up to ₹50,000 / mo</option>
+                  <option value="100000">Up to ₹1 Lakh / mo</option>
+                  <option value="10000000">Up to ₹1 Crore</option>
+                  <option value="30000000">Up to ₹3 Crore</option>
+                  <option value="50000000">Up to ₹5 Crore</option>
+                  <option value="100000000">Up to ₹10 Crore+</option>
+                </select>
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-primary" style="height: 44px; width: 100%;">
+                  Search
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Properties Available Section (Reference Style) -->
+  <section style="padding: 6rem 0; background: var(--background);">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-subtitle">CURATED PORTFOLIO</span>
+        <h2 class="section-title">PROPERTIES <span class="script-accent">Available</span></h2>
+        <p class="section-desc">Handpicked residences of architectural distinction with certified documentation and prime connectivity.</p>
+      </div>
+
+      <div class="property-grid" id="featured-properties-grid">
+        <!-- Rendered by properties.js -->
+      </div>
+
+      <div style="text-align: center; margin-top: 4rem;">
+        <a href="/properties.html" class="btn btn-outline btn-lg">
+          View More Listings
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section (Reference Style: 3 Outlined Feature Cards + Pattern) -->
+  <section id="why-choose-section" class="pattern-damask" style="padding: 6rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-subtitle">HERE'S WHAT MAKES US THE TRUSTED CHOICE</span>
+        <h2 class="section-title">Why <span class="script-accent">Choose Us?</span></h2>
+        <div class="editorial-divider-sm"></div>
+      </div>
+
+      <div class="why-choose-grid">
+        <div class="why-card">
+          <div class="why-card-icon-box">
+            <i class="fa-regular fa-circle-check"></i>
+          </div>
+          <div class="why-card-num">01</div>
+          <h3 class="why-card-title">TRUSTED EXPERTS</h3>
+          <p class="why-card-text">
+            Over 10 years of collective expertise in prime real estate, certified title verification, and discreet client advisory.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-card-icon-box">
+            <i class="fa-regular fa-gem"></i>
+          </div>
+          <div class="why-card-num">02</div>
+          <h3 class="why-card-title">MAXIMIZED VALUE</h3>
+          <p class="why-card-text">
+            We ensure optimal capital efficiency, transparent valuation metrics, and bespoke negotiation for buyers and sellers.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-card-icon-box">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+          <div class="why-card-num">03</div>
+          <h3 class="why-card-title">FAST & RELIABLE</h3>
+          <p class="why-card-text">
+            Seamless paperwork, verified title records, and swift turnaround times from private viewing to final escrow closing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Services Section (Reference Style) -->
+  <section id="services-section" style="padding: 6rem 0; background: var(--background);">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2 class="section-title">Our <span class="script-accent">Services</span></h2>
+        <span class="section-subtitle">SOLUTIONS TAILORED TO YOUR NEEDS</span>
+        <div class="editorial-divider-sm"></div>
+      </div>
+
+      <div class="services-editorial-grid">
+        <a href="/properties.html?listingType=BUY" class="service-editorial-pill">
+          <span class="service-pill-title">Residential Property Assistance</span>
+          <i class="fa-solid fa-arrow-right service-pill-arrow"></i>
+        </a>
+
+        <a href="/properties.html?listingType=RENT" class="service-editorial-pill">
+          <span class="service-pill-title">Commercial Property Guidance</span>
+          <i class="fa-solid fa-arrow-right service-pill-arrow"></i>
+        </a>
+
+        <a href="/agents.html" class="service-editorial-pill">
+          <span class="service-pill-title">Property Valuation & Appraisal</span>
+          <i class="fa-solid fa-arrow-right service-pill-arrow"></i>
+        </a>
+
+        <a href="/about.html" class="service-editorial-pill">
+          <span class="service-pill-title">Property Audit & Title Verification</span>
+          <i class="fa-solid fa-arrow-right service-pill-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent Spotlight Section (Reference Style: Martha James Aesthetic) -->
+  <section class="agent-spotlight-section">
+    <div class="container">
+      <div class="agent-spotlight-card">
+        <div class="agent-portrait-wrapper">
+          <div class="agent-portrait-frame">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Martha James" loading="lazy">
+          </div>
+          <div class="agent-signature-overlay">Martha James</div>
+        </div>
+
+        <div class="agent-info-content">
+          <span class="agent-info-eyebrow">MEET YOUR SENIOR ADVISOR</span>
+          <h2 class="agent-info-name">Martha James</h2>
+          <p class="agent-info-desc">
+            With over two decades representing high-net-worth acquisitions across luxury estates and heritage residences, Martha delivers unmatched market intelligence, discretion, and bespoke guidance.
+          </p>
+
+          <div class="agent-credentials-grid">
+            <div class="credential-item">
+              <i class="fa-regular fa-id-badge"></i>
+              <div>
+                <div class="title">Licensed Specialist</div>
+                <div class="subtitle">Certified RERA Realtor</div>
+              </div>
+            </div>
+
+            <div class="credential-item">
+              <i class="fa-regular fa-calendar-check"></i>
+              <div>
+                <div class="title">20+ Years</div>
+                <div class="subtitle">Industry Experience</div>
+              </div>
+            </div>
+
+            <div class="credential-item">
+              <i class="fa-regular fa-award"></i>
+              <div>
+                <div class="title">Top Luxury Award</div>
+                <div class="subtitle">Best of Estora 2025</div>
+              </div>
+            </div>
+
+            <div class="credential-item">
+              <i class="fa-regular fa-chart-bar"></i>
+              <div>
+                <div class="title">700+ Closings</div>
+                <div class="subtitle">Completed Transactions</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <a href="/agents.html" class="btn btn-primary">
+              View Verified Agents
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials-section" style="padding: 6rem 0; background: var(--background);">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-subtitle">CLIENT ENDORSEMENTS</span>
+        <h2 class="section-title">Words of <span class="script-accent">Excellence</span></h2>
+        <div class="editorial-divider-sm"></div>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-quote-icon">“</div>
+            <p class="testimonial-text">
+              Estora provided an elevated, tranquil acquisition process for our penthouse in Bandra. Every detail was executed with pristine precision.
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Devika Nair" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-name">Devika Nair</div>
+              <div class="testimonial-role">Architectural Collector, Mumbai</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-quote-icon">“</div>
+            <p class="testimonial-text">
+              The level of discretion, title verification, and architectural clarity made securing our corporate office suite entirely stress-free.
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Rohit Singhania" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-name">Rohit Singhania</div>
+              <div class="testimonial-role">Managing Director, Bengaluru</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-quote-icon">“</div>
+            <p class="testimonial-text">
+              From the initial private viewing to the final registration, the concierge service exceeded all standard brokerage expectations.
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80" alt="Alia Mehta" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-name">Alia Mehta</div>
+              <div class="testimonial-role">Villa Owner, Pune</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explore by Prime Cities -->
+  <section style="padding: 6rem 0; background: var(--surface-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-subtitle">PRIME DESTINATIONS</span>
+        <h2 class="section-title">Explore by <span class="script-accent">City</span></h2>
+        <p class="section-desc">Curated residences across India's most prestigious metropolitan enclaves.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;" class="city-grid">
+        <a href="/properties.html?city=Mumbai" style="position:relative; height:280px; border-radius:var(--radius-xs); overflow:hidden; border:1px solid var(--border);" class="city-card">
+          <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=600&q=80" alt="Mumbai" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;">
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(17,17,17,0.85) 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:1.5rem;">
+            <h3 style="color:#fff; font-family:var(--font-display); font-size:1.6rem; font-weight:500;">Mumbai</h3>
+            <span style="color:#E8E6E1; font-size:10px; letter-spacing:0.12em; text-transform:uppercase;">Bandra • Worli • BKC</span>
+          </div>
+        </a>
+
+        <a href="/properties.html?city=Bengaluru" style="position:relative; height:280px; border-radius:var(--radius-xs); overflow:hidden; border:1px solid var(--border);" class="city-card">
+          <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=600&q=80" alt="Bengaluru" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;">
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(17,17,17,0.85) 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:1.5rem;">
+            <h3 style="color:#fff; font-family:var(--font-display); font-size:1.6rem; font-weight:500;">Bengaluru</h3>
+            <span style="color:#E8E6E1; font-size:10px; letter-spacing:0.12em; text-transform:uppercase;">Indiranagar • Lavelle Road</span>
+          </div>
+        </a>
+
+        <a href="/properties.html?city=Pune" style="position:relative; height:280px; border-radius:var(--radius-xs); overflow:hidden; border:1px solid var(--border);" class="city-card">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Pune" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;">
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(17,17,17,0.85) 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:1.5rem;">
+            <h3 style="color:#fff; font-family:var(--font-display); font-size:1.6rem; font-weight:500;">Pune</h3>
+            <span style="color:#E8E6E1; font-size:10px; letter-spacing:0.12em; text-transform:uppercase;">Koregaon Park • Kalyani Nagar</span>
+          </div>
+        </a>
+
+        <a href="/properties.html?city=Delhi" style="position:relative; height:280px; border-radius:var(--radius-xs); overflow:hidden; border:1px solid var(--border);" class="city-card">
+          <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80" alt="Delhi" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;">
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(17,17,17,0.85) 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:1.5rem;">
+            <h3 style="color:#fff; font-family:var(--font-display); font-size:1.6rem; font-weight:500;">Delhi NCR</h3>
+            <span style="color:#E8E6E1; font-size:10px; letter-spacing:0.12em; text-transform:uppercase;">Golf Links • Vasant Vihar</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner Section -->
+  <section style="padding: 6rem 0; background: var(--dark); color: var(--white); text-align: center;">
+    <div class="container" style="max-width: 800px;">
+      <span style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:#A3A3A3; display:block; margin-bottom:1rem;">JOIN THE EDITORIAL ROSTER</span>
+      <h2 style="color: var(--white); font-family: var(--font-display); font-size: clamp(2.5rem, 4.5vw, 3.75rem); font-weight: 400; margin-bottom: 1.25rem;">
+        Are you a Property Owner or Certified Agent?
+      </h2>
+      <p style="color: #A3A3A3; font-size: 0.95rem; line-height: 1.8; margin-bottom: 2.5rem;">
+        List your properties on Estora. Reach vetted high-net-worth buyers and oversee client inquiries through our streamlined agent workstation.
+      </p>
+      <div style="display:flex; justify-content:center; gap:1.25rem; flex-wrap:wrap;">
+        <a href="/register.html?role=AGENT" class="btn btn-outline" style="background:#fff; color:#111; border-color:#fff;">Join as an Agent</a>
+        <a href="/properties.html" class="btn btn-outline" style="color:var(--white); border-color:#404040;">Explore Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            ESTORA
+          </div>
+          <p class="footer-tagline">
+            A luxury real estate editorial portal connecting discerning buyers and tenants with architectural residences and certified advisors.
+          </p>
+          <div style="display:flex; gap:1.25rem; color:#A3A3A3; font-size:1rem;">
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Portfolio</div>
+          <ul class="footer-links">
+            <li><a href="/properties.html?listingType=BUY" class="footer-link">For Purchase</a></li>
+            <li><a href="/properties.html?listingType=RENT" class="footer-link">For Lease</a></li>
+            <li><a href="/agents.html" class="footer-link">Verified Advisors</a></li>
+            <li><a href="/about.html" class="footer-link">About Estora</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Prime Cities</div>
+          <ul class="footer-links">
+            <li><a href="/properties.html?city=Mumbai" class="footer-link">Mumbai</a></li>
+            <li><a href="/properties.html?city=Bengaluru" class="footer-link">Bengaluru</a></li>
+            <li><a href="/properties.html?city=Pune" class="footer-link">Pune</a></li>
+            <li><a href="/properties.html?city=Delhi" class="footer-link">Delhi NCR</a></li>
+            <li><a href="/properties.html?city=Hyderabad" class="footer-link">Hyderabad</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Portals</div>
+          <ul class="footer-links">
+            <li><a href="/login.html" class="footer-link">Member Sign In</a></li>
+            <li><a href="/agent/dashboard.html" class="footer-link">Agent Workstation</a></li>
+            <li><a href="/admin/dashboard.html" class="footer-link">Admin Console</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Full-Stack Architecture</div>
+          <p style="font-size:12px; color:#8C8C8C; line-height:1.7;">
+            Engineered with Spring Boot REST backend, MySQL relational persistence, stateless JWT security, and Vanilla JS luxury interface.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 ESTORA Real Estate Editorial. All rights reserved.</div>
+        <div>Luxury Editorial Experience • Enterprise Grade Security</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/favorites.js"></script>
+  <script src="/js/properties.js"></script>
+  <script>
+    let currentListingType = 'BUY';
+
+    function setListingType(type, btn) {
+      currentListingType = type;
+      document.querySelectorAll('.search-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function handleHeroSearch(e) {
+      e.preventDefault();
+      const location = document.getElementById('hero-search-location').value;
+      const type = document.getElementById('hero-search-type').value;
+      const bedrooms = document.getElementById('hero-search-bedrooms').value;
+      const maxPrice = document.getElementById('hero-search-budget').value;
+
+      const params = new URLSearchParams();
+      params.set('listingType', currentListingType);
+      if (location) params.set('location', location);
+      if (type && type !== 'ALL') params.set('propertyType', type);
+      if (bedrooms && bedrooms !== '0') params.set('bedrooms', bedrooms);
+      if (maxPrice) params.set('maxPrice', maxPrice);
+
+      window.location.href = `/properties.html?${params.toString()}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      Properties.loadFeatured();
+    });
+  </script>
+</body>
+</html>

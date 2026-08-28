@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard & Analytics | ESTORA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/js/theme.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="container-fluid nav-container">
+      <a href="/index.html" class="nav-brand">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        ESTORA <span style="font-size:0.75rem; color:#dc2626; font-weight:700; background:#fee2e2; padding:2px 8px; border-radius:12px; margin-left:6px;">SUPER ADMIN</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="/index.html" class="nav-link">Main Portal</a></li>
+        <li><a href="/properties.html" class="nav-link">Live Properties</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div id="nav-user-actions"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-user-card">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Avatar" id="sidebar-user-avatar" class="sidebar-avatar">
+        <div>
+          <div class="sidebar-user-name" id="sidebar-user-name">Super Admin</div>
+          <div class="sidebar-user-role" id="sidebar-user-role">PORTAL ADMIN</div>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li>
+          <a href="/admin/dashboard.html" class="sidebar-link active">
+            <i class="fa-solid fa-gauge-high"></i> Executive Analytics
+          </a>
+        </li>
+        <li>
+          <a href="/admin/properties.html" class="sidebar-link">
+            <i class="fa-solid fa-building-circle-check"></i> Property Moderation
+          </a>
+        </li>
+        <li>
+          <a href="/admin/users.html" class="sidebar-link">
+            <i class="fa-solid fa-users"></i> Users Directory
+          </a>
+        </li>
+        <li>
+          <a href="/admin/agents.html" class="sidebar-link">
+            <i class="fa-solid fa-user-shield"></i> Agent Verification
+          </a>
+        </li>
+        <li>
+          <a href="/admin/inquiries.html" class="sidebar-link">
+            <i class="fa-solid fa-headset"></i> Leads & Inquiries
+          </a>
+        </li>
+        <li style="margin-top:auto;">
+          <a href="javascript:void(0)" onclick="Auth.logout()" class="sidebar-link" style="color:var(--danger);">
+            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="dash-header">
+        <div>
+          <h1 class="dash-title">Platform Intelligence & Operations</h1>
+          <p class="dash-subtitle">Real-time system telemetry, approval workflows, and market metrics</p>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Total Listings</span>
+            <div class="stat-card-icon" style="background:var(--primary-light); color:var(--primary);">
+              <i class="fa-solid fa-building"></i>
+            </div>
+          </div>
+          <div class="stat-card-value" id="admin-total-props">0</div>
+          <div class="stat-card-change" style="color:var(--primary);">Platform database count</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Pending Approvals</span>
+            <div class="stat-card-icon" style="background:var(--warning-light); color:var(--warning);">
+              <i class="fa-solid fa-hourglass-half"></i>
+            </div>
+          </div>
+          <div class="stat-card-value" id="admin-pending-props">0</div>
+          <div class="stat-card-change" style="color:var(--warning);">Requires moderation</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Registered Accounts</span>
+            <div class="stat-card-icon" style="background:var(--success-light); color:var(--success);">
+              <i class="fa-solid fa-users"></i>
+            </div>
+          </div>
+          <div class="stat-card-value" id="admin-total-users">0</div>
+          <div class="stat-card-change positive">Active ecosystem</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Total Inquiries</span>
+            <div class="stat-card-icon" style="background:#f3e8ff; color:#9333ea;">
+              <i class="fa-solid fa-envelope-circle-check"></i>
+            </div>
+          </div>
+          <div class="stat-card-value" id="admin-total-inquiries">0</div>
+          <div class="stat-card-change" style="color:#9333ea;">Client leads processed</div>
+        </div>
+      </div>
+
+      <!-- Chart.js Analytical Visualizations -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3 class="chart-card-title">Listing Portfolio by Category</h3>
+          <div class="chart-container">
+            <canvas id="chart-property-types"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3 class="chart-card-title">Regional Distribution by City</h3>
+          <div class="chart-container">
+            <canvas id="chart-properties-by-city"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Growth Velocity Chart -->
+      <div class="chart-card" style="margin-bottom:2rem;">
+        <h3 class="chart-card-title">Platform Growth Trends (Monthly Velocity)</h3>
+        <div style="position:relative; height:280px; width:100%;">
+          <canvas id="chart-monthly-growth"></canvas>
+        </div>
+      </div>
+
+      <!-- Pending Moderation Table -->
+      <div class="table-card">
+        <div class="table-header">
+          <h3 class="table-title">Immediate Action: Pending Property Approvals</h3>
+          <a href="/admin/properties.html" class="btn btn-outline btn-sm">View All Properties</a>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Submitting Agent</th>
+                <th>Listing Price</th>
+                <th>Review Status</th>
+                <th>Moderation Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-pending-table-body">
+              <!-- Rendered by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/favorites.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Admin.initDashboard();
+    });
+  </script>
+</body>
+</html>

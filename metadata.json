@@ -1,0 +1,6 @@
+{
+  "name": "ESTORA - Real Estate Portal",
+  "description": "A full-stack modern real estate portal featuring verified properties, advanced filters, user/agent/admin dashboards, inquiry management, and favorites.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

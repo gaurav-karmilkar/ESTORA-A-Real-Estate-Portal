@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Sign In | ESTORA Luxury Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="nav-brand">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        ESTORA
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/agents.html" class="nav-link">Agents</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button 
+          type="button" 
+          class="theme-toggle-btn" 
+          id="theme-toggle" 
+          onclick="ThemeManager.toggleTheme()" 
+          title="Toggle Theme"
+          aria-label="Toggle Night/Day Theme"
+        >
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="/register.html" class="btn btn-outline btn-sm">Create Account</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Split Screen Authentication Layout -->
+  <main class="login-layout">
+    <!-- Left Editorial Image Panel -->
+    <div class="login-image">
+      <img 
+        src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=85" 
+        alt="Estora Luxury Residence" 
+        loading="eager"
+      >
+      <div class="login-image-overlay"></div>
+      
+      <div class="login-quote-box">
+        <div class="login-quote-brand">
+          <i class="fa-solid fa-gem"></i> ESTORA EDITORIAL PORTFOLIO
+        </div>
+        <span class="login-quote-line1">Find a place</span>
+        <span class="login-quote-line2">that feels like home.</span>
+        <p style="margin-top: 1rem; font-size: 13px; color: rgba(245, 243, 238, 0.85); line-height: 1.6;">
+          Verified estates, signature penthouses, and architectural landmarks across India’s premier corridors.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Login Form Panel -->
+    <div class="login-form-wrapper">
+      <div class="login-form-container">
+        
+        <!-- Auth Header -->
+        <div class="auth-header">
+          <span class="section-subtitle">EDITORIAL ACCESS</span>
+          <h1 class="auth-title">Welcome <span class="script-accent">Back</span></h1>
+          <p class="auth-subtitle">Sign in to continue to your ESTORA portfolio.</p>
+        </div>
+
+        <!-- 1-Click Quick Demo Access -->
+        <div class="demo-access-box">
+          <div class="demo-access-title">
+            <i class="fa-solid fa-bolt" style="color: var(--accent);"></i> Quick Demo Access
+          </div>
+          <div class="demo-access-grid">
+            <button 
+              type="button" 
+              class="demo-chip-btn" 
+              onclick="fillDemoCredentials('admin@estora.com', 'password123')"
+              title="Populate Admin Credentials"
+            >
+              ADMIN
+            </button>
+            <button 
+              type="button" 
+              class="demo-chip-btn" 
+              onclick="fillDemoCredentials('agent@estora.com', 'password123')"
+              title="Populate Agent Credentials"
+            >
+              AGENT
+            </button>
+            <button 
+              type="button" 
+              class="demo-chip-btn" 
+              onclick="fillDemoCredentials('user@estora.com', 'password123')"
+              title="Populate Member Credentials"
+            >
+              USER
+            </button>
+          </div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <!-- Email Input -->
+          <div class="form-group">
+            <label class="form-label" for="login-email">EMAIL ADDRESS</label>
+            <div class="input-icon-group">
+              <i class="fa-solid fa-envelope input-icon-left"></i>
+              <input 
+                type="email" 
+                id="login-email" 
+                class="form-control" 
+                required 
+                placeholder="name@estora.com" 
+                autocomplete="email"
+              >
+            </div>
+          </div>
+
+          <!-- Password Input with Toggle -->
+          <div class="form-group" style="margin-bottom: 1.75rem;">
+            <div class="form-label-wrap" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.45rem;">
+              <label class="form-label" for="login-password" style="margin-bottom:0;">PASSWORD</label>
+              <a 
+                href="javascript:void(0)" 
+                onclick="Utils.showToast('Demo password is: password123', 'info')" 
+                class="forgot-password-link"
+              >
+                Forgot password?
+              </a>
+            </div>
+            <div class="input-icon-group">
+              <i class="fa-solid fa-lock input-icon-left"></i>
+              <input 
+                type="password" 
+                id="login-password" 
+                class="form-control" 
+                required 
+                placeholder="••••••••" 
+                autocomplete="current-password"
+              >
+              <button 
+                type="button" 
+                class="password-toggle-btn" 
+                id="password-toggle-btn" 
+                onclick="togglePasswordVisibility()" 
+                title="Show/Hide Password"
+                aria-label="Toggle Password Visibility"
+              >
+                <i class="fa-regular fa-eye" id="password-toggle-icon"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="login-button" id="login-submit-btn">
+            SIGN IN TO ESTORA
+          </button>
+        </form>
+
+        <!-- Bottom Link -->
+        <div class="auth-footer-link">
+          Don't have an account? <a href="/register.html">Create an account</a>
+        </div>
+
+        <!-- Copyright Note -->
+        <div class="auth-legal-note">
+          © 2026 ESTORA Luxury Real Estate • Privacy • Terms
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('login-password');
+      const icon = document.getElementById('password-toggle-icon');
+      if (!passInput || !icon) return;
+
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        icon.className = 'fa-regular fa-eye-slash';
+      } else {
+        passInput.type = 'password';
+        icon.className = 'fa-regular fa-eye';
+      }
+    }
+
+    function fillDemoCredentials(email, password) {
+      document.getElementById('login-email').value = email;
+      document.getElementById('login-password').value = password;
+      Utils.showToast(`Loaded ${email.split('@')[0].toUpperCase()} credentials`, 'info');
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('login-submit-btn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> &nbsp; AUTHENTICATING...';
+      btn.disabled = true;
+
+      try {
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        const res = await ApiService.login(email, password);
+        Auth.setToken(res.data.token);
+        Auth.setUser(res.data.user);
+
+        Utils.showToast('Authentication successful. Redirecting...', 'success');
+
+        setTimeout(() => {
+          if (res.data.user.role === 'ADMIN') {
+            window.location.href = '/admin/dashboard.html';
+          } else if (res.data.user.role === 'AGENT') {
+            window.location.href = '/agent/dashboard.html';
+          } else {
+            window.location.href = '/index.html';
+          }
+        }, 500);
+      } catch (err) {
+        Utils.showToast(err.message || 'Invalid email or password', 'error');
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
