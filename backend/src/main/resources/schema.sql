@@ -1,0 +1,91 @@
+-- ============================================================================
+-- ESTORA LUXURY REAL ESTATE PORTAL - SPRING BOOT SCHEMA DDL
+-- ============================================================================
+
+CREATE TABLE IF NOT EXISTS users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    phone VARCHAR(30),
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'USER',
+    status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+    agency VARCHAR(150),
+    is_verified BOOLEAN DEFAULT FALSE,
+    avatar_url VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS amenities (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    icon VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS properties (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(15, 2) NOT NULL,
+    property_type VARCHAR(30) NOT NULL,
+    listing_type VARCHAR(20) NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'APPROVED',
+    city VARCHAR(100) NOT NULL,
+    locality VARCHAR(150) NOT NULL,
+    address VARCHAR(500) NOT NULL,
+    bedrooms INT DEFAULT 0,
+    bathrooms INT DEFAULT 0,
+    area DECIMAL(12, 2) NOT NULL,
+    parking INT DEFAULT 0,
+    furnishing VARCHAR(30) DEFAULT 'UNFURNISHED',
+    featured BOOLEAN DEFAULT FALSE,
+    exclusive BOOLEAN DEFAULT FALSE,
+    agent_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS property_images (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    property_id BIGINT NOT NULL,
+    image_url VARCHAR(1000) NOT NULL,
+    is_primary BOOLEAN DEFAULT FALSE,
+    display_order INT DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS property_amenities (
+    property_id BIGINT NOT NULL,
+    amenity_id BIGINT NOT NULL,
+    PRIMARY KEY (property_id, amenity_id)
+);
+
+CREATE TABLE IF NOT EXISTS favorites (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    property_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS inquiries (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT,
+    property_id BIGINT NOT NULL,
+    agent_id BIGINT NOT NULL,
+    name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    message TEXT NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'NEW',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS reviews (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    agent_id BIGINT NOT NULL,
+    rating INT NOT NULL,
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

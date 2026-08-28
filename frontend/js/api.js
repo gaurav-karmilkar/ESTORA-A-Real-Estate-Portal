@@ -38,7 +38,22 @@ const ApiService = {
         headers
       });
 
-      const data = await response.json();
+      let data;
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        try {
+          data = await response.json();
+        } catch {
+          data = { success: false, message: 'Invalid JSON response from server' };
+        }
+      } else {
+        const text = await response.text();
+        try {
+          data = JSON.parse(text);
+        } catch {
+          data = { success: false, message: text || `HTTP ${response.status} ${response.statusText}` };
+        }
+      }
 
       if (!response.ok) {
         if (response.status === 401 && !endpoint.includes('/auth/login')) {
@@ -47,7 +62,7 @@ const ApiService = {
           localStorage.removeItem('estora_user');
           window.dispatchEvent(new Event('estora-auth-changed'));
         }
-        throw new Error(data.message || `Request failed with status ${response.status}`);
+        throw new Error((data && data.message) || `Request failed with status ${response.status}`);
       }
 
       return data;
@@ -58,10 +73,14 @@ const ApiService = {
   },
 
   // Auth Endpoints
-  login(credentials) {
+  login(emailOrCredentials, maybePassword) {
+    const payload = typeof emailOrCredentials === 'object' && emailOrCredentials !== null
+      ? emailOrCredentials
+      : { email: emailOrCredentials, password: maybePassword };
+
     return this.request('/auth/login', {
       method: 'POST',
-      body: JSON.stringify(credentials)
+      body: JSON.stringify(payload)
     });
   },
 

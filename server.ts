@@ -107,9 +107,9 @@ const sanitizeUser = (user: User) => {
 
 // --- AUTHENTICATION ---
 
-app.post('/api/auth/register', async (req: Request, res: Response) => {
+app.post(['/api/auth/register', '/auth/register'], async (req: Request, res: Response) => {
   try {
-    const { name, email, phone, password, role, agency } = req.body;
+    const { name, email, phone, password, role, agency } = req.body || {};
     if (!name || !email || !password) {
       return res.status(400).json({ success: false, message: 'Name, email and password are required' });
     }
@@ -160,15 +160,15 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
   }
 });
 
-app.post('/api/auth/login', async (req: Request, res: Response) => {
+app.post(['/api/auth/login', '/auth/login'], async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body || {};
     if (!email || !password) {
       return res.status(400).json({ success: false, message: 'Email and password are required' });
     }
 
     const db = dbManager.getDatabase();
-    const user = db.users.find(u => u.email.toLowerCase() === email.toLowerCase().trim());
+    const user = db.users.find(u => u.email.toLowerCase() === String(email).toLowerCase().trim());
     if (!user) {
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
     }
@@ -177,7 +177,7 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
       return res.status(403).json({ success: false, message: 'Your account has been deactivated or suspended. Please contact admin.' });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(String(password), user.password);
     if (!isMatch) {
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
     }
@@ -202,7 +202,7 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
   }
 });
 
-app.get('/api/auth/me', authenticateJwt, (req: AuthenticatedRequest, res: Response) => {
+app.get(['/api/auth/me', '/auth/me'], authenticateJwt, (req: AuthenticatedRequest, res: Response) => {
   const db = dbManager.getDatabase();
   const user = db.users.find(u => u.id === req.user!.id);
   if (!user) {
@@ -952,6 +952,18 @@ app.post('/api/upload', authenticateJwt, upload.single('image'), (req: Authentic
     message: 'Image uploaded successfully',
     data: { url: fileUrl }
   });
+});
+
+// Global API error handler for body-parser or unhandled exceptions
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  if (err instanceof SyntaxError && 'body' in err) {
+    return res.status(400).json({ success: false, message: 'Invalid JSON payload format' });
+  }
+  if (req.path.startsWith('/api/') || req.path.startsWith('/auth/')) {
+    console.error('API Error:', err);
+    return res.status(500).json({ success: false, message: err.message || 'Internal server error' });
+  }
+  next(err);
 });
 
 // ==========================================

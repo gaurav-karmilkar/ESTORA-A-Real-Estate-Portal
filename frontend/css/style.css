@@ -1007,8 +1007,8 @@ select.form-control {
    ========================================================================== */
 .property-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 2rem;
 }
 
 .property-card {
@@ -1020,6 +1020,7 @@ select.form-control {
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .property-card:hover {
@@ -1031,7 +1032,7 @@ select.form-control {
 .property-media {
   position: relative;
   width: 100%;
-  padding-top: 66%;
+  padding-top: 64%;
   overflow: hidden;
   background-color: var(--surface-warm);
 }
@@ -1090,7 +1091,7 @@ select.form-control {
 }
 
 .property-body {
-  padding: 1.5rem;
+  padding: 1.4rem 1.4rem 1.25rem 1.4rem;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -1099,7 +1100,7 @@ select.form-control {
 .property-category-tag {
   font-family: var(--font-body);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -1108,15 +1109,20 @@ select.form-control {
 
 .property-title {
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--text-dark);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   line-height: 1.25;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.property-title a {
+  color: var(--text-dark);
 }
 
 .property-title a:hover {
@@ -1126,52 +1132,91 @@ select.form-control {
 .property-location {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   font-family: var(--font-body);
   font-size: 12px;
   color: var(--text-muted);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+.property-location span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.property-location i {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* Specs Row */
 .property-specs {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.85rem 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  padding: 0.75rem 0;
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.1rem;
   font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text);
 }
 
 .spec-item {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
+  min-width: 0;
 }
 
 .spec-item i {
   font-size: 0.85rem;
   color: var(--text-light);
+  flex-shrink: 0;
+}
+
+.meta-item-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.15;
+}
+
+.meta-item-val {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta-item-label {
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .property-price-wrap {
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
 
 .property-price-label {
   font-family: var(--font-body);
   font-size: 9px;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-light);
   display: block;
+  margin-bottom: 0.15rem;
 }
 
 .property-price {
@@ -1180,6 +1225,7 @@ select.form-control {
   font-weight: 500;
   color: var(--text-dark);
   letter-spacing: 0;
+  line-height: 1.15;
 }
 
 .property-price .price-period {
@@ -1189,26 +1235,33 @@ select.form-control {
   color: var(--text-muted);
 }
 
+/* Card Footer: Agent + Button (No Text Coinciding or Overlapping) */
 .property-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
   margin-top: auto;
-  padding-top: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-light);
 }
 
 .agent-mini {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
 }
 
 .agent-mini-img {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .agent-mini-name {
@@ -1216,6 +1269,19 @@ select.form-control {
   font-size: 11px;
   font-weight: 500;
   color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  min-width: 0;
+}
+
+.view-property-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 0.5rem 0.95rem;
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
 }
 
 /* ==========================================================================
@@ -2733,10 +2799,15 @@ textarea:focus {
 /* Listings Layout */
 .listing-layout {
   display: grid;
-  grid-template-columns: 290px 1fr;
-  gap: 2.75rem;
-  padding: 3rem 0 6rem 0;
+  grid-template-columns: 280px 1fr;
+  gap: 2.25rem;
+  padding: 2.5rem 0 5rem 0;
   align-items: flex-start;
+}
+
+.listing-layout .property-grid {
+  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+  gap: 1.75rem;
 }
 
 .filter-sidebar {

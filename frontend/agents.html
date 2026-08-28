@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verified Advisors & Partners | ESTORA Luxury Real Estate</title>
+  <title>Our Real Estate Agents | ESTORA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -43,10 +43,10 @@
   <!-- Page Header -->
   <div style="background:var(--white); border-bottom:1px solid var(--border); padding:4rem 0 3.5rem 0;">
     <div class="container text-center">
-      <span class="section-subtitle">ADVISORY DIRECTORY</span>
-      <h1 style="font-size:clamp(2.4rem, 4.5vw, 3.5rem); margin-bottom:0.75rem;">Verified Luxury <span class="script-accent">Advisors</span></h1>
+      <span class="section-subtitle">OUR EXPERTS</span>
+      <h1 style="font-size:clamp(2.4rem, 4.5vw, 3.5rem); margin-bottom:0.75rem;">Verified Real Estate <span class="script-accent">Agents</span></h1>
       <p class="section-desc" style="max-width:650px; margin:0 auto;">
-        Partner with certified regional experts offering verified title records, confidential acquisitions, and tailored portfolio management.
+        Connect with friendly, verified agents who help you buy, sell, or rent properties safely and easily.
       </p>
     </div>
   </div>
@@ -61,8 +61,8 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-bottom">
-        <div>&copy; 2026 ESTORA Luxury Real Estate Editorial. All rights reserved.</div>
-        <div>Curated Architectural Residences & Certified Local Advisors</div>
+        <div>&copy; 2026 ESTORA Real Estate. All rights reserved.</div>
+        <div>Simple, Secure & Reliable Real Estate Portal</div>
       </div>
     </div>
   </footer>
@@ -79,7 +79,7 @@
         const agents = res.data || [];
 
         if (agents.length === 0) {
-          grid.innerHTML = '<div style="grid-column: 1 / -1;" class="empty-state">No advisors registered yet.</div>';
+          grid.innerHTML = '<div style="grid-column: 1 / -1;" class="empty-state">No agents registered yet.</div>';
           return;
         }
 
@@ -87,14 +87,14 @@
           <div class="agent-card">
             <img src="${agent.avatarUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80'}" alt="${Utils.escapeHtml(agent.name)}" class="agent-card-avatar">
             <h3 class="agent-card-name">${Utils.escapeHtml(agent.name)}</h3>
-            <div class="agent-card-agency">${Utils.escapeHtml(agent.agency || 'Certified Luxury Broker')}</div>
+            <div class="agent-card-agency">${Utils.escapeHtml(agent.agency || 'Verified Real Estate Agent')}</div>
             <div style="margin-bottom:1rem;">
-              <span class="badge badge-approved"><i class="fa-solid fa-circle-check"></i> Certified Partner</span>
+              <span class="badge badge-approved"><i class="fa-solid fa-circle-check"></i> Verified Agent</span>
             </div>
             <div class="agent-card-stats">
               <div>
                 <div class="agent-stat-value">${agent.listingsCount || 0}</div>
-                <div style="color:var(--text-muted); font-size:9px; text-transform:uppercase; letter-spacing:0.12em;">Listings</div>
+                <div style="color:var(--text-muted); font-size:9px; text-transform:uppercase; letter-spacing:0.12em;">Properties</div>
               </div>
               <div>
                 <div class="agent-stat-value">5.0 ★</div>
@@ -103,16 +103,16 @@
             </div>
             <div style="display:flex; gap:0.5rem; justify-content:center; margin-top:1.25rem;">
               <a href="tel:${agent.phone || '+919811000000'}" class="btn btn-outline btn-sm btn-block">
-                <i class="fa-solid fa-phone"></i> Contact
+                <i class="fa-solid fa-phone"></i> Call
               </a>
               <a href="/properties.html?location=${encodeURIComponent(agent.name)}" class="btn btn-primary btn-sm btn-block">
-                View Portfolio
+                View Homes
               </a>
             </div>
           </div>
         `).join('');
       } catch (err) {
-        grid.innerHTML = '<div style="grid-column: 1 / -1; color:var(--danger); text-align:center;">Failed to load advisors directory.</div>';
+        grid.innerHTML = '<div style="grid-column: 1 / -1; color:var(--danger); text-align:center;">Failed to load agents list.</div>';
       }
     }
 

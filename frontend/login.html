@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Member Sign In | ESTORA Luxury Real Estate</title>
+  <title>Sign In | ESTORA Real Estate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -51,19 +51,19 @@
     <div class="login-image">
       <img 
         src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=85" 
-        alt="Estora Luxury Residence" 
+        alt="Estora Home" 
         loading="eager"
       >
       <div class="login-image-overlay"></div>
       
       <div class="login-quote-box">
         <div class="login-quote-brand">
-          <i class="fa-solid fa-gem"></i> ESTORA EDITORIAL PORTFOLIO
+          <i class="fa-solid fa-gem"></i> ESTORA REAL ESTATE
         </div>
         <span class="login-quote-line1">Find a place</span>
         <span class="login-quote-line2">that feels like home.</span>
         <p style="margin-top: 1rem; font-size: 13px; color: rgba(245, 243, 238, 0.85); line-height: 1.6;">
-          Verified estates, signature penthouses, and architectural landmarks across India’s premier corridors.
+          Verified homes, apartments, villas, and spaces across India's top cities.
         </p>
       </div>
     </div>
@@ -74,15 +74,15 @@
         
         <!-- Auth Header -->
         <div class="auth-header">
-          <span class="section-subtitle">EDITORIAL ACCESS</span>
+          <span class="section-subtitle">ACCOUNT LOGIN</span>
           <h1 class="auth-title">Welcome <span class="script-accent">Back</span></h1>
-          <p class="auth-subtitle">Sign in to continue to your ESTORA portfolio.</p>
+          <p class="auth-subtitle">Sign in to manage your saved homes and inquiries.</p>
         </div>
 
         <!-- 1-Click Quick Demo Access -->
         <div class="demo-access-box">
           <div class="demo-access-title">
-            <i class="fa-solid fa-bolt" style="color: var(--accent);"></i> Quick Demo Access
+            <i class="fa-solid fa-bolt" style="color: var(--accent);"></i> Quick Demo Login
           </div>
           <div class="demo-access-grid">
             <button 
@@ -167,7 +167,7 @@
 
           <!-- Submit Button -->
           <button type="submit" class="login-button" id="login-submit-btn">
-            SIGN IN TO ESTORA
+            SIGN IN
           </button>
         </form>
 
@@ -178,7 +178,7 @@
 
         <!-- Copyright Note -->
         <div class="auth-legal-note">
-          © 2026 ESTORA Luxury Real Estate • Privacy • Terms
+          © 2026 ESTORA Real Estate • Privacy • Terms
         </div>
 
       </div>
@@ -213,7 +213,7 @@
       e.preventDefault();
       const btn = document.getElementById('login-submit-btn');
       const originalText = btn.innerHTML;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> &nbsp; AUTHENTICATING...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> &nbsp; SIGNING IN...';
       btn.disabled = true;
 
       try {
@@ -224,7 +224,7 @@
         Auth.setToken(res.data.token);
         Auth.setUser(res.data.user);
 
-        Utils.showToast('Authentication successful. Redirecting...', 'success');
+        Utils.showToast('Login successful! Redirecting...', 'success');
 
         setTimeout(() => {
           if (res.data.user.role === 'ADMIN') {

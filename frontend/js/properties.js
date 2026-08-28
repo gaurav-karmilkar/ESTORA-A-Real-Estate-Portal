@@ -37,9 +37,9 @@ const Properties = {
         <div class="property-card-content property-body">
           <div class="property-category-tag">${Utils.escapeHtml(property.propertyType || 'Residence')}</div>
           <h3 class="property-title">
-            <a href="/property-details.html?id=${property.id}">${Utils.escapeHtml(property.title)}</a>
+            <a href="/property-details.html?id=${property.id}" title="${Utils.escapeHtml(property.title)}">${Utils.escapeHtml(property.title)}</a>
           </h3>
-          <div class="property-location">
+          <div class="property-location" title="${Utils.escapeHtml(property.locality)}, ${Utils.escapeHtml(property.city)}">
             <i class="fa-solid fa-location-dot"></i>
             <span>${Utils.escapeHtml(property.locality)}, ${Utils.escapeHtml(property.city)}</span>
           </div>
@@ -69,20 +69,20 @@ const Properties = {
           </div>
 
           <div class="price-section property-price-wrap">
-            <span class="price-label property-price-label">${property.listingType === 'RENT' ? 'Monthly Lease' : 'Starting Price'}</span>
+            <span class="price-label property-price-label">${property.listingType === 'RENT' ? 'Monthly Rent' : 'Starting Price'}</span>
             <div class="property-price">
               ${Utils.formatPrice(property.price, property.listingType)}
             </div>
           </div>
 
           <div class="property-card-footer property-footer">
-            <div class="agent-info agent-mini">
+            <div class="agent-info agent-mini" title="${Utils.escapeHtml(property.agent ? property.agent.name : 'Agent')}">
               <img 
                 src="${(property.agent && property.agent.avatarUrl) ? property.agent.avatarUrl : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80'}" 
                 alt="${Utils.escapeHtml(property.agent ? property.agent.name : 'Agent')}" 
                 class="agent-avatar agent-mini-img"
               >
-              <span class="agent-name agent-mini-name">${Utils.escapeHtml(property.agent ? property.agent.name : 'Verified Advisor')}</span>
+              <span class="agent-name agent-mini-name">${Utils.escapeHtml(property.agent ? property.agent.name : 'Verified Agent')}</span>
             </div>
             <a href="/property-details.html?id=${property.id}" class="btn btn-outline btn-sm view-property-btn">
               View Property

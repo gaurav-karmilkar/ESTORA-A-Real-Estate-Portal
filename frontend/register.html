@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Account | ESTORA Luxury Real Estate</title>
+  <title>Create Account | ESTORA Real Estate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -38,9 +38,9 @@
   <div class="auth-wrapper">
     <div class="auth-card" style="max-width:540px;">
       <div class="auth-header">
-        <span class="section-subtitle">JOIN THE ROSTER</span>
+        <span class="section-subtitle">JOIN US</span>
         <h1 class="auth-title">Create <span class="script-accent">Account</span></h1>
-        <p class="auth-subtitle">Register to save bespoke properties or manage estate listings</p>
+        <p class="auth-subtitle">Sign up to save favorite homes or list properties</p>
       </div>
 
       <form id="register-form" onsubmit="handleRegister(event)">
@@ -54,39 +54,39 @@
             </label>
             <label style="border:1px solid var(--border); padding:0.85rem 1rem; border-radius:var(--radius-xs); cursor:pointer; display:flex; align-items:center; gap:0.6rem;" id="agent-radio-box">
               <input type="radio" name="account-role" value="AGENT" onchange="toggleAgentFields(this.value)" style="accent-color:var(--primary);">
-              <span style="font-weight:600; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);" id="agent-radio-label">Estate Advisor</span>
+              <span style="font-weight:600; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);" id="agent-radio-label">Real Estate Agent</span>
             </label>
           </div>
         </div>
 
         <div class="form-group" style="margin-bottom:1.25rem;">
-          <label class="form-label">Full Legal Name</label>
+          <label class="form-label">Full Name</label>
           <input type="text" id="reg-name" class="form-control" required placeholder="e.g. Vikram Malhotra">
         </div>
 
         <div class="form-group" style="margin-bottom:1.25rem;">
           <label class="form-label">Email Address</label>
-          <input type="email" id="reg-email" class="form-control" required placeholder="name@domain.com">
+          <input type="email" id="reg-email" class="form-control" required placeholder="name@example.com">
         </div>
 
         <div class="form-group" style="margin-bottom:1.25rem;">
-          <label class="form-label">Phone Contact</label>
+          <label class="form-label">Phone Number</label>
           <input type="tel" id="reg-phone" class="form-control" placeholder="+91 98200 12345">
         </div>
 
         <!-- Optional Agency Field for Agents -->
         <div class="form-group" id="agency-field-group" style="margin-bottom:1.25rem; display:none;">
-          <label class="form-label">Agency / Brokerage Name</label>
-          <input type="text" id="reg-agency" class="form-control" placeholder="e.g. Apex Luxury Living">
+          <label class="form-label">Agency / Company Name</label>
+          <input type="text" id="reg-agency" class="form-control" placeholder="e.g. City Prime Realty">
         </div>
 
         <div class="form-group" style="margin-bottom:1.75rem;">
-          <label class="form-label">Security Password (min. 6 characters)</label>
+          <label class="form-label">Password (at least 6 characters)</label>
           <input type="password" id="reg-password" class="form-control" required minlength="6" placeholder="••••••••">
         </div>
 
         <button type="submit" class="btn btn-primary btn-block btn-lg" id="reg-submit-btn">
-          Create Estora Account
+          Create Account
         </button>
       </form>
 
@@ -139,7 +139,7 @@
       e.preventDefault();
       const btn = document.getElementById('reg-submit-btn');
       const originalText = btn.innerHTML;
-      btn.innerHTML = 'Registering Account...';
+      btn.innerHTML = 'Creating Account...';
       btn.disabled = true;
 
       try {
@@ -162,7 +162,7 @@
         Auth.setToken(res.data.token);
         Auth.setUser(res.data.user);
 
-        Utils.showToast('Account registered successfully!', 'success');
+        Utils.showToast('Account created successfully!', 'success');
 
         setTimeout(() => {
           if (res.data.user.role === 'ADMIN') {
@@ -172,7 +172,7 @@
           } else {
             window.location.href = '/index.html';
           }
-        }, 600);
+        }, 500);
       } catch (err) {
         Utils.showToast(err.message || 'Registration failed', 'error');
         btn.innerHTML = originalText;

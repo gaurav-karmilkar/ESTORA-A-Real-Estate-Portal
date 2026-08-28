@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESTORA | Luxury Real Estate Editorial</title>
-  <meta name="description" content="Discover architecturally distinct villas, luxury apartments, and premium commercial estates with verified agents and transparent pricing.">
+  <title>ESTORA | Real Estate & Homes</title>
+  <meta name="description" content="Find houses, apartments, villas, and commercial properties with verified agents and clear prices.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -43,11 +43,11 @@
     </div>
   </nav>
 
-  <!-- Hero Section (Luxury Real Estate Editorial) -->
+  <!-- Hero Section -->
   <header class="hero-editorial">
     <div class="container">
       <div class="hero-editorial-wrapper">
-        <span class="hero-eyebrow">EXCLUSIVE REAL ESTATE EDITORIAL</span>
+        <span class="hero-eyebrow">FIND YOUR DREAM HOME</span>
         
         <h1 class="hero-editorial-title">
           <span class="title-top">FIND YOUR</span>
@@ -55,10 +55,10 @@
         </h1>
 
         <p class="hero-editorial-desc">
-          Explore architecturally distinct villas, luxury residences, and prime commercial estates with certified documentation and trusted local advisors.
+          Find houses, flats, villas, and commercial spaces to buy or rent from trusted real estate agents.
         </p>
 
-        <!-- Quick Circular Navigation (Reference Style) -->
+        <!-- Quick Circular Navigation -->
         <div class="hero-quick-nav">
           <a href="/about.html" class="quick-nav-item">
             <div class="quick-nav-circle"><i class="fa-regular fa-user"></i></div>
@@ -66,7 +66,7 @@
           </a>
           <a href="/properties.html" class="quick-nav-item">
             <div class="quick-nav-circle"><i class="fa-regular fa-building"></i></div>
-            <span class="quick-nav-label">Listings</span>
+            <span class="quick-nav-label">Homes</span>
           </a>
           <a href="#services-section" class="quick-nav-item">
             <div class="quick-nav-circle"><i class="fa-regular fa-handshake"></i></div>
@@ -90,40 +90,40 @@
         <div class="search-widget">
           <div class="search-tabs">
             <button class="search-tab-btn active" data-type="BUY" onclick="setListingType('BUY', this)">
-              For Purchase
+              Buy
             </button>
             <button class="search-tab-btn" data-type="RENT" onclick="setListingType('RENT', this)">
-              For Lease
+              Rent
             </button>
           </div>
 
           <form id="hero-search-form" onsubmit="handleHeroSearch(event)">
             <div class="search-grid">
               <div class="form-group">
-                <label class="form-label">Location / Keyword</label>
-                <input type="text" id="hero-search-location" class="form-control" placeholder="City, locality, or landmark...">
+                <label class="form-label">City or Area</label>
+                <input type="text" id="hero-search-location" class="form-control" placeholder="Search city, area, or landmark...">
               </div>
 
               <div class="form-group">
                 <label class="form-label">Property Type</label>
                 <select id="hero-search-type" class="form-control">
                   <option value="ALL">All Types</option>
-                  <option value="APARTMENT">Apartment</option>
-                  <option value="VILLA">Luxury Villa</option>
-                  <option value="HOUSE">Independent House</option>
-                  <option value="PLOT">Residential Plot</option>
-                  <option value="COMMERCIAL">Commercial Estate</option>
-                  <option value="OFFICE">Office Suite</option>
+                  <option value="APARTMENT">Apartment / Flat</option>
+                  <option value="VILLA">Villa</option>
+                  <option value="HOUSE">House</option>
+                  <option value="PLOT">Plot / Land</option>
+                  <option value="COMMERCIAL">Commercial Space</option>
+                  <option value="OFFICE">Office</option>
                 </select>
               </div>
 
               <div class="form-group">
                 <label class="form-label">Bedrooms</label>
                 <select id="hero-search-bedrooms" class="form-control">
-                  <option value="0">Any BHK</option>
-                  <option value="1">1+ BHK</option>
-                  <option value="2">2+ BHK</option>
-                  <option value="3">3+ BHK</option>
+                  <option value="0">Any Bedrooms</option>
+                  <option value="1">1 BHK</option>
+                  <option value="2">2 BHK</option>
+                  <option value="3">3 BHK</option>
                   <option value="4">4+ BHK</option>
                 </select>
               </div>
@@ -132,12 +132,12 @@
                 <label class="form-label">Max Budget</label>
                 <select id="hero-search-budget" class="form-control">
                   <option value="">Any Budget</option>
-                  <option value="50000">Up to ₹50,000 / mo</option>
-                  <option value="100000">Up to ₹1 Lakh / mo</option>
+                  <option value="50000">Up to ₹50,000 / month</option>
+                  <option value="100000">Up to ₹1 Lakh / month</option>
                   <option value="10000000">Up to ₹1 Crore</option>
-                  <option value="30000000">Up to ₹3 Crore</option>
-                  <option value="50000000">Up to ₹5 Crore</option>
-                  <option value="100000000">Up to ₹10 Crore+</option>
+                  <option value="30000000">Up to ₹3 Crores</option>
+                  <option value="50000000">Up to ₹5 Crores</option>
+                  <option value="100000000">Above ₹10 Crores</option>
                 </select>
               </div>
 
@@ -153,13 +153,13 @@
     </div>
   </header>
 
-  <!-- Properties Available Section (Reference Style) -->
+  <!-- Properties Available Section -->
   <section style="padding: 6rem 0; background: var(--background);">
     <div class="container">
       <div class="section-header text-center">
-        <span class="section-subtitle">CURATED PORTFOLIO</span>
-        <h2 class="section-title">PROPERTIES <span class="script-accent">Available</span></h2>
-        <p class="section-desc">Handpicked residences of architectural distinction with certified documentation and prime connectivity.</p>
+        <span class="section-subtitle">FEATURED PROPERTIES</span>
+        <h2 class="section-title">Homes <span class="script-accent">For You</span></h2>
+        <p class="section-desc">Explore our best houses and flats with clear details, real photos, and great locations.</p>
       </div>
 
       <div class="property-grid" id="featured-properties-grid">
@@ -168,17 +168,17 @@
 
       <div style="text-align: center; margin-top: 4rem;">
         <a href="/properties.html" class="btn btn-outline btn-lg">
-          View More Listings
+          Browse All Properties
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Why Choose Us Section (Reference Style: 3 Outlined Feature Cards + Pattern) -->
+  <!-- Why Choose Us Section -->
   <section id="why-choose-section" class="pattern-damask" style="padding: 6rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="container">
       <div class="section-header text-center">
-        <span class="section-subtitle">HERE'S WHAT MAKES US THE TRUSTED CHOICE</span>
+        <span class="section-subtitle">WHY PEOPLE TRUST US</span>
         <h2 class="section-title">Why <span class="script-accent">Choose Us?</span></h2>
         <div class="editorial-divider-sm"></div>
       </div>
@@ -189,9 +189,9 @@
             <i class="fa-regular fa-circle-check"></i>
           </div>
           <div class="why-card-num">01</div>
-          <h3 class="why-card-title">TRUSTED EXPERTS</h3>
+          <h3 class="why-card-title">EXPERIENCED AGENTS</h3>
           <p class="why-card-text">
-            Over 10 years of collective expertise in prime real estate, certified title verification, and discreet client advisory.
+            Over 10 years of experience helping people buy, sell, and rent homes safely and easily.
           </p>
         </div>
 
@@ -200,9 +200,9 @@
             <i class="fa-regular fa-gem"></i>
           </div>
           <div class="why-card-num">02</div>
-          <h3 class="why-card-title">MAXIMIZED VALUE</h3>
+          <h3 class="why-card-title">HONEST PRICING</h3>
           <p class="why-card-text">
-            We ensure optimal capital efficiency, transparent valuation metrics, and bespoke negotiation for buyers and sellers.
+            We help you find great properties at fair market prices with clear details and no hidden fees.
           </p>
         </div>
 
@@ -211,49 +211,49 @@
             <i class="fa-regular fa-clock"></i>
           </div>
           <div class="why-card-num">03</div>
-          <h3 class="why-card-title">FAST & RELIABLE</h3>
+          <h3 class="why-card-title">QUICK & EASY</h3>
           <p class="why-card-text">
-            Seamless paperwork, verified title records, and swift turnaround times from private viewing to final escrow closing.
+            Simple paperwork, verified property documents, and helpful support every step of the way.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Our Services Section (Reference Style) -->
+  <!-- Our Services Section -->
   <section id="services-section" style="padding: 6rem 0; background: var(--background);">
     <div class="container">
       <div class="section-header text-center">
         <h2 class="section-title">Our <span class="script-accent">Services</span></h2>
-        <span class="section-subtitle">SOLUTIONS TAILORED TO YOUR NEEDS</span>
+        <span class="section-subtitle">HOW WE CAN HELP YOU</span>
         <div class="editorial-divider-sm"></div>
       </div>
 
       <div class="services-editorial-grid">
         <a href="/properties.html?listingType=BUY" class="service-editorial-pill">
-          <span class="service-pill-title">Residential Property Assistance</span>
+          <span class="service-pill-title">Buy a Home or Flat</span>
           <i class="fa-solid fa-arrow-right service-pill-arrow"></i>
         </a>
 
         <a href="/properties.html?listingType=RENT" class="service-editorial-pill">
-          <span class="service-pill-title">Commercial Property Guidance</span>
+          <span class="service-pill-title">Rent a Home or Office</span>
           <i class="fa-solid fa-arrow-right service-pill-arrow"></i>
         </a>
 
         <a href="/agents.html" class="service-editorial-pill">
-          <span class="service-pill-title">Property Valuation & Appraisal</span>
+          <span class="service-pill-title">Find Top Real Estate Agents</span>
           <i class="fa-solid fa-arrow-right service-pill-arrow"></i>
         </a>
 
         <a href="/about.html" class="service-editorial-pill">
-          <span class="service-pill-title">Property Audit & Title Verification</span>
+          <span class="service-pill-title">Check Property Documents & Papers</span>
           <i class="fa-solid fa-arrow-right service-pill-arrow"></i>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Agent Spotlight Section (Reference Style: Martha James Aesthetic) -->
+  <!-- Agent Spotlight Section -->
   <section class="agent-spotlight-section">
     <div class="container">
       <div class="agent-spotlight-card">
@@ -265,18 +265,18 @@
         </div>
 
         <div class="agent-info-content">
-          <span class="agent-info-eyebrow">MEET YOUR SENIOR ADVISOR</span>
+          <span class="agent-info-eyebrow">MEET OUR FEATURED AGENT</span>
           <h2 class="agent-info-name">Martha James</h2>
           <p class="agent-info-desc">
-            With over two decades representing high-net-worth acquisitions across luxury estates and heritage residences, Martha delivers unmatched market intelligence, discretion, and bespoke guidance.
+            With over 20 years of experience helping buyers and families find great homes, Martha provides honest advice and helpful guidance throughout the whole process.
           </p>
 
           <div class="agent-credentials-grid">
             <div class="credential-item">
               <i class="fa-regular fa-id-badge"></i>
               <div>
-                <div class="title">Licensed Specialist</div>
-                <div class="subtitle">Certified RERA Realtor</div>
+                <div class="title">Licensed Agent</div>
+                <div class="subtitle">Certified Realtor</div>
               </div>
             </div>
 
@@ -284,14 +284,14 @@
               <i class="fa-regular fa-calendar-check"></i>
               <div>
                 <div class="title">20+ Years</div>
-                <div class="subtitle">Industry Experience</div>
+                <div class="subtitle">Work Experience</div>
               </div>
             </div>
 
             <div class="credential-item">
               <i class="fa-regular fa-award"></i>
               <div>
-                <div class="title">Top Luxury Award</div>
+                <div class="title">Top Agent Award</div>
                 <div class="subtitle">Best of Estora 2025</div>
               </div>
             </div>
@@ -299,15 +299,15 @@
             <div class="credential-item">
               <i class="fa-regular fa-chart-bar"></i>
               <div>
-                <div class="title">700+ Closings</div>
-                <div class="subtitle">Completed Transactions</div>
+                <div class="title">700+ Happy Clients</div>
+                <div class="subtitle">Completed Deals</div>
               </div>
             </div>
           </div>
 
           <div>
             <a href="/agents.html" class="btn btn-primary">
-              View Verified Agents
+              View All Agents
             </a>
           </div>
         </div>
@@ -319,8 +319,8 @@
   <section id="testimonials-section" style="padding: 6rem 0; background: var(--background);">
     <div class="container">
       <div class="section-header text-center">
-        <span class="section-subtitle">CLIENT ENDORSEMENTS</span>
-        <h2 class="section-title">Words of <span class="script-accent">Excellence</span></h2>
+        <span class="section-subtitle">CUSTOMER REVIEWS</span>
+        <h2 class="section-title">What Our <span class="script-accent">Clients Say</span></h2>
         <div class="editorial-divider-sm"></div>
       </div>
 
@@ -329,14 +329,14 @@
           <div>
             <div class="testimonial-quote-icon">“</div>
             <p class="testimonial-text">
-              Estora provided an elevated, tranquil acquisition process for our penthouse in Bandra. Every detail was executed with pristine precision.
+              Estora made buying our apartment in Bandra so easy and smooth. Everything was clear from start to finish.
             </p>
           </div>
           <div class="testimonial-author">
             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Devika Nair" class="testimonial-avatar">
             <div>
               <div class="testimonial-name">Devika Nair</div>
-              <div class="testimonial-role">Architectural Collector, Mumbai</div>
+              <div class="testimonial-role">Homeowner, Mumbai</div>
             </div>
           </div>
         </div>
@@ -345,14 +345,14 @@
           <div>
             <div class="testimonial-quote-icon">“</div>
             <p class="testimonial-text">
-              The level of discretion, title verification, and architectural clarity made securing our corporate office suite entirely stress-free.
+              Finding our new office was completely hassle-free. The agent helped with all the documents and legal checks.
             </p>
           </div>
           <div class="testimonial-author">
             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Rohit Singhania" class="testimonial-avatar">
             <div>
               <div class="testimonial-name">Rohit Singhania</div>
-              <div class="testimonial-role">Managing Director, Bengaluru</div>
+              <div class="testimonial-role">Business Owner, Bengaluru</div>
             </div>
           </div>
         </div>
@@ -361,14 +361,14 @@
           <div>
             <div class="testimonial-quote-icon">“</div>
             <p class="testimonial-text">
-              From the initial private viewing to the final registration, the concierge service exceeded all standard brokerage expectations.
+              From visiting the house to getting the keys, the team was helpful, friendly, and always ready to answer our questions.
             </p>
           </div>
           <div class="testimonial-author">
             <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80" alt="Alia Mehta" class="testimonial-avatar">
             <div>
               <div class="testimonial-name">Alia Mehta</div>
-              <div class="testimonial-role">Villa Owner, Pune</div>
+              <div class="testimonial-role">Homeowner, Pune</div>
             </div>
           </div>
         </div>
@@ -380,9 +380,9 @@
   <section style="padding: 6rem 0; background: var(--surface-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="container">
       <div class="section-header text-center">
-        <span class="section-subtitle">PRIME DESTINATIONS</span>
+        <span class="section-subtitle">TOP CITIES</span>
         <h2 class="section-title">Explore by <span class="script-accent">City</span></h2>
-        <p class="section-desc">Curated residences across India's most prestigious metropolitan enclaves.</p>
+        <p class="section-desc">Find homes and properties in the most popular cities.</p>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;" class="city-grid">
@@ -424,16 +424,16 @@
   <!-- CTA Banner Section -->
   <section style="padding: 6rem 0; background: var(--dark); color: var(--white); text-align: center;">
     <div class="container" style="max-width: 800px;">
-      <span style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:#A3A3A3; display:block; margin-bottom:1rem;">JOIN THE EDITORIAL ROSTER</span>
+      <span style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:#A3A3A3; display:block; margin-bottom:1rem;">LIST YOUR PROPERTY</span>
       <h2 style="color: var(--white); font-family: var(--font-display); font-size: clamp(2.5rem, 4.5vw, 3.75rem); font-weight: 400; margin-bottom: 1.25rem;">
-        Are you a Property Owner or Certified Agent?
+        Are you a Property Owner or Real Estate Agent?
       </h2>
       <p style="color: #A3A3A3; font-size: 0.95rem; line-height: 1.8; margin-bottom: 2.5rem;">
-        List your properties on Estora. Reach vetted high-net-worth buyers and oversee client inquiries through our streamlined agent workstation.
+        Post your properties on Estora. Connect with verified buyers and manage your leads easily.
       </p>
       <div style="display:flex; justify-content:center; gap:1.25rem; flex-wrap:wrap;">
         <a href="/register.html?role=AGENT" class="btn btn-outline" style="background:#fff; color:#111; border-color:#fff;">Join as an Agent</a>
-        <a href="/properties.html" class="btn btn-outline" style="color:var(--white); border-color:#404040;">Explore Portfolio</a>
+        <a href="/properties.html" class="btn btn-outline" style="color:var(--white); border-color:#404040;">Browse Properties</a>
       </div>
     </div>
   </section>
@@ -447,27 +447,27 @@
             ESTORA
           </div>
           <p class="footer-tagline">
-            A luxury real estate editorial portal connecting discerning buyers and tenants with architectural residences and certified advisors.
+            A simple, trusted real estate website to buy, rent, and sell homes with verified agents.
           </p>
           <div style="display:flex; gap:1.25rem; color:#A3A3A3; font-size:1rem;">
-            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
           </div>
         </div>
 
         <div>
-          <div class="footer-col-title">Portfolio</div>
+          <div class="footer-col-title">Properties</div>
           <ul class="footer-links">
-            <li><a href="/properties.html?listingType=BUY" class="footer-link">For Purchase</a></li>
-            <li><a href="/properties.html?listingType=RENT" class="footer-link">For Lease</a></li>
-            <li><a href="/agents.html" class="footer-link">Verified Advisors</a></li>
-            <li><a href="/about.html" class="footer-link">About Estora</a></li>
+            <li><a href="/properties.html?listingType=BUY" class="footer-link">Buy a Home</a></li>
+            <li><a href="/properties.html?listingType=RENT" class="footer-link">Rent a Home</a></li>
+            <li><a href="/agents.html" class="footer-link">Verified Agents</a></li>
+            <li><a href="/about.html" class="footer-link">About Us</a></li>
           </ul>
         </div>
 
         <div>
-          <div class="footer-col-title">Prime Cities</div>
+          <div class="footer-col-title">Top Cities</div>
           <ul class="footer-links">
             <li><a href="/properties.html?city=Mumbai" class="footer-link">Mumbai</a></li>
             <li><a href="/properties.html?city=Bengaluru" class="footer-link">Bengaluru</a></li>
@@ -480,23 +480,23 @@
         <div>
           <div class="footer-col-title">Portals</div>
           <ul class="footer-links">
-            <li><a href="/login.html" class="footer-link">Member Sign In</a></li>
-            <li><a href="/agent/dashboard.html" class="footer-link">Agent Workstation</a></li>
-            <li><a href="/admin/dashboard.html" class="footer-link">Admin Console</a></li>
+            <li><a href="/login.html" class="footer-link">User Sign In</a></li>
+            <li><a href="/agent/dashboard.html" class="footer-link">Agent Portal</a></li>
+            <li><a href="/admin/dashboard.html" class="footer-link">Admin Portal</a></li>
           </ul>
         </div>
 
         <div>
-          <div class="footer-col-title">Full-Stack Architecture</div>
+          <div class="footer-col-title">Fast & Secure Platform</div>
           <p style="font-size:12px; color:#8C8C8C; line-height:1.7;">
-            Engineered with Spring Boot REST backend, MySQL relational persistence, stateless JWT security, and Vanilla JS luxury interface.
+            Built for quick search, secure user accounts, and reliable real estate listings across India.
           </p>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>&copy; 2026 ESTORA Real Estate Editorial. All rights reserved.</div>
-        <div>Luxury Editorial Experience • Enterprise Grade Security</div>
+        <div>&copy; 2026 ESTORA Real Estate. All rights reserved.</div>
+        <div>Simple, Secure & Reliable Real Estate Portal</div>
       </div>
     </div>
   </footer>

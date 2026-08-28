@@ -27,7 +27,25 @@ const Auth = {
 
   saveSession(token, user) {
     localStorage.setItem('estora_token', token);
-    localStorage.setItem('estora_user', JSON.stringify(user));
+    localStorage.setItem('estora_user', typeof user === 'string' ? user : JSON.stringify(user));
+    window.dispatchEvent(new Event('estora-auth-changed'));
+  },
+
+  setToken(token) {
+    if (token) {
+      localStorage.setItem('estora_token', token);
+    } else {
+      localStorage.removeItem('estora_token');
+    }
+    window.dispatchEvent(new Event('estora-auth-changed'));
+  },
+
+  setUser(user) {
+    if (user) {
+      localStorage.setItem('estora_user', typeof user === 'string' ? user : JSON.stringify(user));
+    } else {
+      localStorage.removeItem('estora_user');
+    }
     window.dispatchEvent(new Event('estora-auth-changed'));
   },
 

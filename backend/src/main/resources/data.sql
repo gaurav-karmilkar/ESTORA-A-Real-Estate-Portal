@@ -85,6 +85,20 @@ CREATE TABLE IF NOT EXISTS favorites (
     FOREIGN KEY (property_id) REFERENCES properties(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- Create Reviews Table
+CREATE TABLE IF NOT EXISTS reviews (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    agent_id BIGINT NOT NULL,
+    rating INT NOT NULL,
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (agent_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_review_agent (agent_id),
+    INDEX idx_review_user (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Create Inquiries Table
 CREATE TABLE IF NOT EXISTS inquiries (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -199,3 +213,11 @@ INSERT IGNORE INTO favorites (id, user_id, property_id) VALUES
 (3, 3, 5),
 (4, 10, 2),
 (5, 10, 7);
+
+-- Seed Agent Reviews
+INSERT IGNORE INTO reviews (id, user_id, agent_id, rating, comment) VALUES
+(1, 3, 2, 5, 'Aarav is exceptional in his knowledge of Bandra and South Mumbai luxury residences. Guided us through the title verification smoothly.'),
+(2, 10, 4, 5, 'Priya provided unparalleled discretion and curated exclusive off-market penthouse viewings in Worli.'),
+(3, 3, 5, 4, 'Very professional experience with Vikram on our Bengaluru estate acquisition. Transparent documentation and prompt communication.'),
+(4, 10, 7, 5, 'Kabir Mehta is easily the top advisor for Delhi Golf Links and Lutyens bungalows. Highly recommended.');
+

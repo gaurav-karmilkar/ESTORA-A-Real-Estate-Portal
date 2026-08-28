@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estate Details | ESTORA Luxury Real Estate</title>
+  <title>Property Details | ESTORA Real Estate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ballet&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -47,14 +47,14 @@
       <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;">
         <a href="/index.html" style="color:var(--text-muted);">Home</a> <span>/</span>
         <a href="/properties.html" style="color:var(--text-muted);">Properties</a> <span>/</span>
-        <span id="breadcrumb-title" style="color:var(--text); font-weight:600;">Estate Portfolio</span>
+        <span id="breadcrumb-title" style="color:var(--text); font-weight:600;">Property</span>
       </div>
 
       <div style="display:flex; gap:0.75rem;">
         <button class="btn btn-outline btn-sm" id="detail-fav-btn" onclick="handleDetailFavToggle()">
-          <i class="fa-regular fa-heart"></i> Save Estate
+          <i class="fa-regular fa-heart"></i> Save Property
         </button>
-        <button class="btn btn-outline btn-sm" onclick="navigator.clipboard.writeText(window.location.href); Utils.showToast('Estate link copied to clipboard.', 'success');">
+        <button class="btn btn-outline btn-sm" onclick="navigator.clipboard.writeText(window.location.href); Utils.showToast('Link copied to clipboard.', 'success');">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> Share
         </button>
       </div>
@@ -64,11 +64,11 @@
     <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1.5rem;">
       <div>
         <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem;">
-          <span class="badge badge-buy" id="detail-listing-badge">FOR PURCHASE</span>
+          <span class="badge badge-buy" id="detail-listing-badge">FOR SALE</span>
           <span class="badge" style="background:var(--surface-alt); color:var(--text); border:1px solid var(--border);" id="detail-type-badge">APARTMENT</span>
-          <span class="badge badge-approved" id="detail-status-badge">CERTIFIED TITLE</span>
+          <span class="badge badge-approved" id="detail-status-badge">VERIFIED</span>
         </div>
-        <h1 id="detail-title" style="font-family:var(--font-display); font-size:clamp(2.4rem, 4.5vw, 3.75rem); font-weight:400; line-height:1.1; margin-bottom:0.6rem;">Loading Estate...</h1>
+        <h1 id="detail-title" style="font-family:var(--font-display); font-size:clamp(2.4rem, 4.5vw, 3.75rem); font-weight:400; line-height:1.1; margin-bottom:0.6rem;">Loading Property...</h1>
         <div style="display:flex; align-items:center; gap:0.5rem; color:var(--text-muted); font-size:13px;" id="detail-location">
           <i class="fa-solid fa-location-dot" style="color:var(--text-muted);"></i>
           <span>Loading address...</span>
@@ -76,7 +76,7 @@
       </div>
 
       <div style="text-align:right;">
-        <span style="font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:0.25rem;">PRICE VALUATION</span>
+        <span style="font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:0.25rem;">PRICE</span>
         <div style="font-family:var(--font-display); font-size:clamp(2.2rem, 3.8vw, 3.25rem); font-weight:500; color:var(--primary); line-height:1;" id="detail-price">
           ₹0
         </div>
@@ -97,7 +97,7 @@
       <div>
         <!-- Key Specifications Grid -->
         <div class="detail-section">
-          <h2 class="detail-section-title">Architectural Overview</h2>
+          <h2 class="detail-section-title">Property Details</h2>
           <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem; text-align:center;">
             <div style="padding:1.5rem 1rem; background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-xs);">
               <i class="fa-solid fa-bed" style="color:var(--text); font-size:1.4rem; margin-bottom:0.6rem; display:block;"></i>
@@ -119,7 +119,7 @@
 
             <div style="padding:1.5rem 1rem; background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-xs);">
               <i class="fa-solid fa-car" style="color:var(--text); font-size:1.4rem; margin-bottom:0.6rem; display:block;"></i>
-              <div style="font-size:9px; color:var(--text-muted); font-weight:600; letter-spacing:0.16em; text-transform:uppercase;">PARKING BAY</div>
+              <div style="font-size:9px; color:var(--text-muted); font-weight:600; letter-spacing:0.16em; text-transform:uppercase;">PARKING</div>
               <div style="font-family:var(--font-display); font-weight:500; font-size:1.35rem; margin-top:0.25rem;" id="spec-parking">-</div>
             </div>
           </div>
@@ -127,15 +127,15 @@
 
         <!-- Description -->
         <div class="detail-section">
-          <h2 class="detail-section-title">About this Residence</h2>
+          <h2 class="detail-section-title">About this Property</h2>
           <div id="detail-description" style="color:var(--text); line-height:1.9; font-size:14px; font-weight:300;">
-            Loading detailed editorial description...
+            Loading description...
           </div>
         </div>
 
         <!-- Amenities -->
         <div class="detail-section">
-          <h2 class="detail-section-title">Curated Amenities & Provisions</h2>
+          <h2 class="detail-section-title">Amenities & Features</h2>
           <div class="amenity-chips" id="detail-amenities">
             <!-- Rendered dynamically -->
           </div>
@@ -143,18 +143,18 @@
 
         <!-- Mortgage / EMI Calculator -->
         <div class="detail-section">
-          <h2 class="detail-section-title">Capital Investment & EMI Calculator</h2>
+          <h2 class="detail-section-title">Home Loan & Monthly EMI Calculator</h2>
           <p style="color:var(--text-muted); margin-bottom:2rem; font-size:13px; line-height:1.6;">
-            Estimate financing installments with standard national banking rates and customized tenure terms.
+            Calculate your estimated monthly payment based on loan amount, interest rate, and tenure.
           </p>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
             <div class="form-group">
-              <label class="form-label">Loan Capital (₹)</label>
+              <label class="form-label">Loan Amount (₹)</label>
               <input type="number" id="calc-loan-amount" class="form-control" value="20000000" oninput="calculateEmi()">
             </div>
             <div class="form-group">
-              <label class="form-label">Annual Interest Rate (%)</label>
+              <label class="form-label">Interest Rate (% per year)</label>
               <input type="number" id="calc-interest-rate" class="form-control" value="8.5" step="0.1" oninput="calculateEmi()">
             </div>
             <div class="form-group">
@@ -162,18 +162,18 @@
               <input type="number" id="calc-tenure-years" class="form-control" value="20" oninput="calculateEmi()">
             </div>
             <div class="form-group">
-              <label class="form-label">Equity Down Payment (₹)</label>
+              <label class="form-label">Down Payment (₹)</label>
               <input type="number" id="calc-down-payment" class="form-control" value="5000000" oninput="calculateEmi()">
             </div>
           </div>
 
           <div style="background:var(--surface-alt); border:1px solid var(--border); padding:2rem; border-radius:var(--radius-xs); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
             <div>
-              <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:0.18em; text-transform:uppercase;">ESTIMATED MONTHLY INSTALLMENT</div>
+              <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:0.18em; text-transform:uppercase;">ESTIMATED MONTHLY EMI</div>
               <div style="font-family:var(--font-display); font-size:2.2rem; font-weight:500; color:var(--primary); margin-top:0.25rem;" id="calc-monthly-emi">₹0 / mo</div>
             </div>
             <div style="text-align:right;">
-              <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:0.18em; text-transform:uppercase;">TOTAL REPAYMENT (PRINCIPAL + INTEREST)</div>
+              <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:0.18em; text-transform:uppercase;">TOTAL AMOUNT (LOAN + INTEREST)</div>
               <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:500; color:var(--text); margin-top:0.25rem;" id="calc-total-payment">₹0</div>
             </div>
           </div>
@@ -187,9 +187,9 @@
             <img src="" alt="Agent" id="agent-avatar" class="agent-contact-avatar">
             <div>
               <h3 style="font-family:var(--font-display); font-size:1.35rem; font-weight:500; margin-bottom:0.2rem;" id="agent-name">Agent Name</h3>
-              <div style="font-size:11px; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase;" id="agent-agency">Prime Realty</div>
+              <div style="font-size:11px; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase;" id="agent-agency">Verified Agent</div>
               <div class="badge badge-approved" style="font-size:8px; margin-top:0.4rem;" id="agent-verified-badge">
-                <i class="fa-solid fa-circle-check"></i> CERTIFIED ADVISOR
+                <i class="fa-solid fa-circle-check"></i> VERIFIED AGENT
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@
           <div style="margin-bottom:1.75rem;">
             <div style="display:flex; gap:0.5rem;">
               <a href="#" id="agent-call-btn" class="btn btn-outline btn-block btn-sm">
-                <i class="fa-solid fa-phone"></i> Call
+                <i class="fa-solid fa-phone"></i> Call Agent
               </a>
               <a href="#" id="agent-whatsapp-btn" class="btn btn-outline btn-block btn-sm">
                 <i class="fa-brands fa-whatsapp"></i> WhatsApp
@@ -206,7 +206,7 @@
           </div>
 
           <h4 style="font-family:var(--font-display); font-size:1.25rem; font-weight:500; margin-bottom:1.25rem; border-top:1px solid var(--border); padding-top:1.25rem;">
-            Request Private Consultation
+            Contact Agent About This Property
           </h4>
 
           <form id="inquiry-form" onsubmit="handleInquirySubmit(event)">
@@ -214,12 +214,12 @@
             
             <div class="form-group" style="margin-bottom:1rem;">
               <label class="form-label">Full Name</label>
-              <input type="text" id="inquiry-name" class="form-control" required placeholder="Your Full Name">
+              <input type="text" id="inquiry-name" class="form-control" required placeholder="Your Name">
             </div>
 
             <div class="form-group" style="margin-bottom:1rem;">
               <label class="form-label">Email Address</label>
-              <input type="email" id="inquiry-email" class="form-control" required placeholder="client@domain.com">
+              <input type="email" id="inquiry-email" class="form-control" required placeholder="you@email.com">
             </div>
 
             <div class="form-group" style="margin-bottom:1rem;">
@@ -228,12 +228,12 @@
             </div>
 
             <div class="form-group" style="margin-bottom:1.5rem;">
-              <label class="form-label">Bespoke Inquiry</label>
-              <textarea id="inquiry-message" class="form-control" rows="3" required placeholder="I am interested in scheduling a private tour of this residence. Please contact me with more information."></textarea>
+              <label class="form-label">Message</label>
+              <textarea id="inquiry-message" class="form-control" rows="3" required placeholder="Hi, I am interested in this property. Please contact me with more details or to schedule a visit."></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary btn-block btn-lg" id="inquiry-submit-btn">
-              Submit Request
+              Send Message
             </button>
           </form>
         </div>
@@ -245,8 +245,8 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-bottom">
-        <div>&copy; 2026 ESTORA Luxury Real Estate Editorial. All rights reserved.</div>
-        <div>Curated Architectural Residences & Certified Local Advisors</div>
+        <div>&copy; 2026 ESTORA Real Estate. All rights reserved.</div>
+        <div>Simple, Secure & Reliable Real Estate Portal</div>
       </div>
     </div>
   </footer>
@@ -273,7 +273,7 @@
         const prop = res.data;
         currentProperty = prop;
 
-        document.title = `${prop.title} | ESTORA Luxury Portfolio`;
+        document.title = `${prop.title} | ESTORA Real Estate`;
         document.getElementById('breadcrumb-title').textContent = prop.title;
         document.getElementById('detail-title').textContent = prop.title;
         document.getElementById('detail-location').querySelector('span').textContent = `${prop.address}, ${prop.locality}, ${prop.city}`;
@@ -284,7 +284,7 @@
           document.getElementById('detail-price-sqft').textContent = `₹${perSqft.toLocaleString('en-IN')} / sq.ft`;
         }
 
-        document.getElementById('detail-listing-badge').textContent = `FOR ${prop.listingType === 'RENT' ? 'LEASE' : 'PURCHASE'}`;
+        document.getElementById('detail-listing-badge').textContent = `FOR ${prop.listingType === 'RENT' ? 'RENT' : 'SALE'}`;
         document.getElementById('detail-listing-badge').className = `badge ${prop.listingType === 'RENT' ? 'badge-rent' : 'badge-buy'}`;
         document.getElementById('detail-type-badge').textContent = prop.propertyType;
 
@@ -307,7 +307,7 @@
             </div>
           `).join('');
         } else {
-          amContainer.innerHTML = '<div style="color:var(--text-muted); font-size:12px;">Standard residential amenities included.</div>';
+          amContainer.innerHTML = '<div style="color:var(--text-muted); font-size:12px;">Basic amenities included.</div>';
         }
 
         // Gallery
@@ -332,7 +332,7 @@
         if (prop.agent) {
           document.getElementById('agent-avatar').src = prop.agent.avatarUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80';
           document.getElementById('agent-name').textContent = prop.agent.name;
-          document.getElementById('agent-agency').textContent = prop.agent.agency || 'Certified Luxury Advisor';
+          document.getElementById('agent-agency').textContent = prop.agent.agency || 'Verified Real Estate Agent';
           document.getElementById('agent-call-btn').href = `tel:${prop.agent.phone || '+919800011111'}`;
           document.getElementById('agent-whatsapp-btn').href = `https://wa.me/${(prop.agent.phone || '919800011111').replace(/[^0-9]/g, '')}`;
         }
@@ -357,7 +357,7 @@
 
         updateFavButton();
       } catch (err) {
-        Utils.showToast('Failed to load estate details', 'error');
+        Utils.showToast('Failed to load property details', 'error');
       }
     }
 
@@ -387,7 +387,7 @@
         btn.innerHTML = '<i class="fa-solid fa-heart" style="color:var(--danger);"></i> Saved to Favorites';
         btn.classList.add('active');
       } else {
-        btn.innerHTML = '<i class="fa-regular fa-heart"></i> Save Estate';
+        btn.innerHTML = '<i class="fa-regular fa-heart"></i> Save Property';
         btn.classList.remove('active');
       }
     }
@@ -402,7 +402,7 @@
       e.preventDefault();
       const btn = document.getElementById('inquiry-submit-btn');
       const originalText = btn.innerHTML;
-      btn.innerHTML = 'Submitting Request...';
+      btn.innerHTML = 'Sending Message...';
       btn.disabled = true;
 
       try {
@@ -420,10 +420,10 @@
           message
         });
 
-        Utils.showToast(res.message || 'Inquiry received. Your private advisor will contact you.', 'success');
+        Utils.showToast(res.message || 'Message sent! The agent will contact you soon.', 'success');
         document.getElementById('inquiry-message').value = '';
       } catch (err) {
-        Utils.showToast(err.message || 'Failed to submit request', 'error');
+        Utils.showToast(err.message || 'Failed to send message', 'error');
       } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
